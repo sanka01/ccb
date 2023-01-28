@@ -1,93 +1,77 @@
-import { StatusBar } from 'expo-status-bar';
-import { ScrollView, StyleSheet, Text, TextInput, Touchable, TouchableOpacity, View } from 'react-native';
-import * as SQLite from 'expo-sqlite'
+import { Button, StyleSheet, TextInput, View } from 'react-native';
 import React from 'react';
+
+
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: null,
-      nome: ""
+      nome: "",
+      status: "",
+      pessoas: []
     }
-    db.transaction(tx => {
-      tx.executeSql(
-        'create table if not exists Pessoas (id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, status INTEGER)'
-      )
-    })
-    this.fetchData()
   }
+
+  register = () => {
+    let nome = this.state.nome;
+    let status = this.state.status
+    if (nome.length === 0 || status.length === 0) {
+      alert("Erro, campo obrigatorio faltando")
+    } else {
+      let insertAPIURL = "https://apiccb.cdamorais.com/inserir.php"
+
+      let headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      };
+
+      let Data = { nome: nome, status: status}
+
+      fetch(insertAPIURL, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(Data)
+      })
+        .then((response) => response.json())
+        .then((response) => {
+          alert(response[0].Message);
+        })
+        .catch((error) => {
+          alert("Error" + error);
+        })
+
+
+    }
+  }
+
   render() {
+  
     return (
       <View style={Style.main}>
-        <Text> TESTE DE TABELA DE PESSOAS</Text>
-        <TouchableOpacity onPress={this.newItem} style={{backgroundColor: '#ff0', padding: 10}}>
-          <Text >Nova pessoa</Text>
-        </TouchableOpacity>
         <TextInput
-            style={{height: 80, fontSize: 20}}
-            placeholder="placeholder"
-            onChangeText={(text) => this.state.nome = text}
-            ref={input => { this.textInput = input }}
-            returnKeyType="go"
-          />
-
-        <ScrollView  >
-          {
-            this.state.data && this.state.data.map(data =>
-            (
-              <View key={data.id}  >
-                <Text>{data.nome} - {data.status}</Text> 
-
-              </View>
-
-            )
-            )
-          }
-        </ScrollView>
+          placeholder='Nome'
+          placeholderTextColor={"grey"}
+          style={Style.txt}
+          onChangeText={nome => this.state.nome = nome}
+        />
+        <TextInput
+          placeholder='Status'
+          placeholderTextColor={"grey"}
+          keyboardType="numeric"
+          style={Style.txt}
+          onChangeText={status => this.state.status = status}
+        />
+        <Button
+          style={Style.button}
+          title='Registrar'
+          onPress={this.register}
+        />
+        <View>
+          
+        </View>
       </View>
     )
-  }
-
-  fetchData = () => {
-    db.transaction(tx => {
-      // sending 4 arguments in executeSql
-      tx.executeSql('SELECT * FROM Pessoas', null, // passing sql query and parameters:null
-        // success callback which sends two things Transaction object and ResultSet Object
-        (txObj, { rows: { _array } }) => this.setState({ data: _array }),
-        // failure callback which sends two things Transaction object and Error
-        (txObj, error) => console.log('Error ', error)
-      ) // end executeSQL
-    }) // end transaction
-  }
-
-  // event handler for new item creation
-  newItem = () => {
-    db.transaction(tx => {
-      tx.executeSql('INSERT INTO Pessoas (nome, status) values (?, ?)', [this.state.nome, 0],
-        (txObj, resultSet) => this.setState({
-          data: this.state.data.concat(
-            { id: resultSet.insertId, nome: this.state.nome, status: 0 })
-        }),
-        (txObj, error) => console.log('Error', error))
-    })
-  }
-
-  delete = (id) => {
-    db.transaction(tx => {
-      tx.executeSql('DELETE FROM Pessoas WHERE id = ? ', [id],
-        (txObj, resultSet) => {
-          if (resultSet.rowsAffected > 0) {
-            let newList = this.state.data.filter(data => {
-              if (data.id === id)
-                return false
-              else
-                return true
-            })
-            this.setState({ data: newList })
-          }
-        })
-    })
   }
 }
 export default App;
@@ -108,7 +92,13 @@ const Style = StyleSheet.create({
   widthfull: {
     width: '100%'
   },
-  list: {
-
+  txt: {
+    borderBottomWidth: 1,
+    borderBottomColor: 'tomato',
+    marginBottom: 30,
+    width: 100
+  },
+  button: {
+    width: 30
   }
 });
