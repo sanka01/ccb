@@ -1,16 +1,27 @@
-import { Button, StyleSheet, TextInput, View } from 'react-native';
-import React from 'react';
+import { Button, StyleSheet, TextInput, View, Text, FlatList } from 'react-native';
+import React, { Component } from 'react';
 
 
 
-class App extends React.Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       nome: "",
       status: "",
-      pessoas: []
+      pessoas: [],
+      loading: true
     }
+  }
+  componentDidMount() {
+    this.getPessoas();
+  }
+  getPessoas = async () => {
+    let url = "https://apiccb.cdamorais.com/selectall.php"
+    let resposta = await fetch(url)
+    let data = await resposta.json()
+    this.setState({ pessoas: data[0]['Rows'], loading: false })
+
   }
 
   register = () => {
@@ -26,7 +37,7 @@ class App extends React.Component {
         'Content-Type': 'application/json'
       };
 
-      let Data = { nome: nome, status: status}
+      let Data = { nome: nome, status: status }
 
       fetch(insertAPIURL, {
         method: 'POST',
@@ -45,8 +56,19 @@ class App extends React.Component {
     }
   }
 
+  renderItem = ({ item }) => {
+
+    console.log(item)
+    return (
+      <View style={Style.itemContainer}>
+        <Text>{item.nome}</Text>
+      </View>
+    );
+  }
+
   render() {
-  
+
+
     return (
       <View style={Style.main}>
         <TextInput
@@ -68,7 +90,14 @@ class App extends React.Component {
           onPress={this.register}
         />
         <View>
-          
+          {this.state.loading && <Text>Carregando...</Text>}
+          {!this.state.loading && (
+            <FlatList
+              data={this.state.pessoas}
+              renderItem={this.renderItem}
+              keyExtractor={(item, index) => index.toString()}
+            />
+          )}
         </View>
       </View>
     )
@@ -100,5 +129,12 @@ const Style = StyleSheet.create({
   },
   button: {
     width: 30
-  }
+  },    
+  itemContainer: {
+    flex: 1,
+    padding: 10,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+},
 });
