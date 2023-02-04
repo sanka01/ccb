@@ -24,7 +24,7 @@ class ListarFamilia extends Component {
         this.setState({ familias: data[2], loading: false })
 
     }
-    estado = () => {
+    familia = () => {
         return this.state.familias.map((familia) => {
             return <Picker.Item label={familia.nome_estado} key={familia.id_estado} value={familia.id_estado} />
         })
@@ -42,7 +42,7 @@ class ListarFamilia extends Component {
                             this.props.estado(itemValue)
                         }}
                     >
-                        {this.estado()}
+                        {this.familia()}
 
                     </Picker>
                 )}
