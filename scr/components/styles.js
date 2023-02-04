@@ -1,4 +1,12 @@
 import { StyleSheet } from "react-native"
+import '@expo/match-media'
+import { useMediaQuery } from "react-responsive"
+
+const branco = "#fff"
+const azulClaro = "#02A1F5"
+const azulEscuro = "#245975"
+
+
 export const styler = StyleSheet.create(
     {
 
@@ -13,13 +21,13 @@ export const styler = StyleSheet.create(
         },
         quadro_info: {
             fontSize: 14,
-            color: "#fff",
+            color: branco,
             textAlign: "center",
             alignSelf: "center",
             padding: 15,
             borderRadius: 5,
             margin: 10,
-            backgroundColor: "#245975"
+            backgroundColor: azulEscuro
         },
         row: {
             flexDirection: "row",
@@ -35,9 +43,10 @@ export const styler = StyleSheet.create(
         },
         titulo: {
             fontSize: 20,
-            backgroundColor: "#245975",
-            color: "#fff",
-            padding: 50
+            backgroundColor: azulEscuro,
+            color: branco,
+            padding: 25,
+            textAlign: "center"
         },
         subtitulo: {
             fontSize: 18,
@@ -47,29 +56,39 @@ export const styler = StyleSheet.create(
         botao: {
             width: 300,
             height: 50,
-            backgroundColor: "#02A1F5",
+            backgroundColor: azulClaro,
             justifyContent: "center",
             textAlign: "center",
-            borderColor: "#014D75",
+            borderColor: azulEscuro,
             borderWidth: 1,
             borderRadius: 25
         },
         botao_quadrado: {
             width: 150,
             height: 150,
-            backgroundColor: "#02A1F5",
+            backgroundColor: azulClaro,
             justifyContent: "center",
             textAlign: "center",
-            borderColor: "#014D75",
+            borderColor: azulEscuro,
             borderWidth: 1,
             borderRadius: 25
         },
         texto: {
-            color: "#fff",
+            color: branco,
             textAlign: "center",
             padding: 10,
             fontSize: 20,
         },
+        itemMusico: {
+            backgroundColor: azulEscuro,
+            padding: 5,
+            marginVertical: 2,
+            marginHorizontal: 5,
+        },
+        tituloMusico: {
+            fontSize: 18,
+            color: branco
+        }
 
     }
 )

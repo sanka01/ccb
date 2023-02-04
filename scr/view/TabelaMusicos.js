@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
-import { ListarComums } from "../components/listarComuns";
+import { FlatList, Text, StatusBar, View } from "react-native";
+import { ListarBotoesComums } from "../components/listarBotoesComuns";
 import { Porcentagens } from "../components/porcentagens";
 
 const style = require("../components/styles").styler
@@ -16,11 +16,50 @@ export class TabelaMusicos extends Component {
         }
     }
 
+
+
     render() {
         var total = (this.state.cordas + this.state.madeiras + this.state.metais)
         var total_real = total + this.state.organistas
+
+        var musicos = [
+            {
+                id: '1',
+                nome: 'nome 1',
+                instrumento: 'instrumento 1'
+            },
+            {
+                id: '2',
+                nome: 'nome 2',
+                instrumento: 'instrumento 2'
+
+            },
+            {
+                id: '3',
+                nome: 'nome 3',
+                instrumento: 'instrumento 3'
+            },
+            {
+                id: '4',
+                nome: 'nome 4',
+                instrumento: 'instrumento 1'
+            },
+            {
+                id: '5',
+                nome: 'nome 5',
+                instrumento: 'instrumento 2'
+
+            },
+            {
+                id: '6',
+                nome: 'nome 6',
+                instrumento: 'instrumento 3'
+            }
+        ]
+
+
         return (
-            <View style={style.container}>
+            <View style={{ flex: 0 }}>
                 <Text style={style.titulo}>{this.props.route.params.cidade}</Text>
                 <Text style={style.subtitulo}> Quadro GERAL</Text>
                 <Porcentagens
@@ -36,12 +75,32 @@ export class TabelaMusicos extends Component {
 
                 </View>
 
-                <View style={style.container}>
+
+                <FlatList
+                    data={musicos}
+                    renderItem={this.renderItem}
+                    keyExtractor={item => item.id}
+
+                />
 
 
-                </View>
             </View>
         )
 
     }
+    renderItem({ item }) {
+        return (
+            <Item
+                nome={item.nome}
+                instrumento={item.instrumento}
+            />
+        )
+    }
 }
+
+const Item = ({ nome, instrumento }) => (
+    <View style={style.itemMusico}>
+        <Text style={style.tituloMusico}>{nome}</Text>
+        <Text style={style.texto}>{instrumento}</Text>
+    </View>
+)

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
-import { ListarComums } from "../components/listarComuns";
+import { ListarBotoesComums } from "../components/listarBotoesComuns";
 import { Porcentagens } from "../components/porcentagens";
 const style = require("../components/styles").styler
 export class QuadroGeralCidade extends Component {
@@ -40,9 +40,9 @@ export class QuadroGeralCidade extends Component {
                         <Text style={style.texto}>Lista Geral</Text>
                     </TouchableOpacity>
 
-                    <ListarComums nome="comum 1" />
-                    <ListarComums nome="comum 2" />
-                    <ListarComums nome="comum 3" />
+                    <ListarBotoesComums nome="comum 1" />
+                    <ListarBotoesComums nome="comum 2" />
+                    <ListarBotoesComums nome="comum 3" />
 
                 </View>
             </View>

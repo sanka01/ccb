@@ -24,7 +24,9 @@ class Home extends Component {
                 </View>
 
                 <View style={styler.container_row}>
-                    <TouchableOpacity style={styler.botao_quadrado}>
+                    <TouchableOpacity style={styler.botao_quadrado} onPress={
+                        () => this.props.navigation.navigate('CadastroMusico')
+                    }>
                         <Text style={styler.texto}>CADASTRAR MÚSICO</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styler.botao_quadrado}  >

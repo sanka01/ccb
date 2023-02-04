@@ -26,7 +26,7 @@ class ListarFamilia extends Component {
     }
     familia = () => {
         return this.state.familias.map((familia) => {
-            return <Picker.Item label={familia.nome_estado} key={familia.id_estado} value={familia.id_estado} />
+            return <Picker.Item label={familia.nome_familia} key={familia.id} value={familia.id} />
         })
     }
     render() {

@@ -3,13 +3,13 @@ import React, { Component } from "react"
 import { View, Text } from "react-native"
 
 
-export class ListarComuns extends Component {
+export class ListarInstrumentos extends Component {
     constructor(props) {
         super(props)
         this.state = {
             loading: true,
-            setores: [],
-            setor: ""
+            instrumentos: [],
+            instrumento: ""
         }
     }
     componentDidMount() {
@@ -23,14 +23,14 @@ export class ListarComuns extends Component {
         let resposta = await fetch(url)
         let data = await resposta.json()
 
-        this.setState({ setores: data[4], loading: false })
-        this.props.cidade = data[4][0]
+        this.setState({ instrumentos: data[3], loading: false })
+        this.props.instrumento = data[3][0]
 
     }
-    setor = () => {
-        return this.state.setores.map((setor) => {
-            if (setor.cidade == this.props.cidade) {
-                return <Picker.Item label={setor.nome} key={setor.id} value={setor.id} />
+    instrumento = () => {
+        return this.state.instrumentos.map((instrumento) => {
+            if (instrumento.id_familia == this.props.id_familia) {
+                return <Picker.Item label={instrumento.nome} key={instrumento.id} value={instrumento.id} />
             } else {
                 return null
             }
@@ -43,14 +43,14 @@ export class ListarComuns extends Component {
                 {this.state.loading && <Text>Carregando...</Text>}
                 {!this.state.loading && (
                     <Picker
-                        selectedValue={this.state.setor}
+                        selectedValue={this.state.instrumento}
                         style={{ height: 50, width: 150 }}
                         onValueChange={(itemValue, itemIndex) => {
-                            this.setState({setor: itemValue})
-                            this.props.setor(itemValue)
+                            this.setState({instrumento: itemValue})
+                            this.props.instrumento(itemValue)
                         } }
                     >
-                        {this.setor()}
+                        {this.instrumento()}
 
                     </Picker>
                 )}

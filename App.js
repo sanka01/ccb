@@ -5,6 +5,7 @@ import Home from './scr/view/Home';
 import { Cidades } from './scr/view/Cidades';
 import { QuadroGeralCidade } from './scr/view/QuadroGeralCidade';
 import { TabelaMusicos } from './scr/view/TabelaMusicos';
+import { CadastroMusico } from './scr/view/CadastroMusico';
 
 
 const Stack = createNativeStackNavigator();
@@ -34,6 +35,11 @@ class App extends Component {
           <Stack.Screen
             name="TabelaMusicos"
             component={TabelaMusicos}
+            options={{title: 'Quadro de Orquestra'}}
+          />
+          <Stack.Screen
+            name="CadastroMusico"
+            component={CadastroMusico}
             options={{title: 'Quadro de Orquestra'}}
           />
         </Stack.Navigator>

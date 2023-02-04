@@ -1,8 +1,11 @@
 import React, { Component } from "react";
-import { TextInput, Button, View, StyleSheet, Text } from "react-native";
+import { Button, TextInput, View } from "react-native";
 import ListarCidades from "./listarCidades";
-import ListarEstados from "./listarEstados";
+import { ListarComuns } from "./listarComuns";
+import ListarFamilia from "./listarFamilia";
+import { ListarInstrumentos } from "./listarInstrumentos";
 
+const Style = require("./styles").styler
 class RegistroPessoa extends Component {
 
     constructor(props) {
@@ -10,16 +13,16 @@ class RegistroPessoa extends Component {
         this.state = {
             nome: "",
             status: "",
-            cidade: "",
-            estado: "",
-            setor: "",
-            familia: "",
+            cidade: "2",
+            estado: "1",
+            setor: "2",
+            familia: "1",
             instrumento: ""
         }
     }
 
 
-  
+
     register = () => {
         if (!nome) {
             alert("Erro, campo obrigatorio faltando")
@@ -59,25 +62,39 @@ class RegistroPessoa extends Component {
     }
 
 
-    setCidade = (cidadeChild) =>{
-        this.setState({cidade: cidadeChild})
+    setCidade = (cidadeChild) => {
+        this.setState({ cidade: cidadeChild })
     }
     setEstado = (estadoChild) => {
-        this.setState({estado: estadoChild})
+        this.setState({ estado: estadoChild })
     }
+
+    setFamilia = (familiaChild) => {
+        this.setState({ familia: familiaChild })
+    }
+
+    setInstrumento = (instrumentoChild) => {
+        this.setState({ instrumento: instrumentoChild })
+    }
+    setSetor = (setorChild) => {
+        this.setState({ setor: setorChild })
+    }
+
 
     render() {
 
         return (
             <View>
                 <TextInput
-                    placeholder='Nome'
+                    placeholder='Nome Completo'
                     placeholderTextColor={"grey"}
-                    style={Style.txt}
+                    style={[Style.texto, { color: "#000" }]}
                     onChangeText={nome => this.state.nome = nome}
                 />
-                <ListarEstados estado={this.setEstado}/>
-                <ListarCidades  estado={this.state.estado} cidade={this.setCidade} />
+                <ListarCidades estado={this.state.estado} cidade={this.setCidade} />
+                <ListarFamilia familia={this.setFamilia} />
+                <ListarInstrumentos familia={this.state.familia} instrumento={this.setInstrumento} />
+                <ListarComuns setor={this.setSetor} cidade={this.state.cidade} />
                 <Button
                     style={Style.button}
                     title='Registrar'
@@ -91,14 +108,3 @@ class RegistroPessoa extends Component {
 export default RegistroPessoa;
 
 
-const Style = StyleSheet.create({
-    txt: {
-        borderBottomWidth: 1,
-        borderBottomColor: 'tomato',
-        marginBottom: 30,
-        width: 100
-    },
-    button: {
-        width: 30
-    },
-})
