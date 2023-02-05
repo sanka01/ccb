@@ -61,7 +61,8 @@ export const styler = StyleSheet.create(
             textAlign: "center",
             borderColor: azulEscuro,
             borderWidth: 1,
-            borderRadius: 25
+            borderRadius: 25,
+            margin: 5,
         },
         botao_quadrado: {
             width: 150,

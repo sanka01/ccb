@@ -3,7 +3,7 @@ import { FlatList, Text, TouchableOpacity, View } from "react-native";
 import { ListarBotoesComums } from "../components/listarBotoesComuns";
 import { Porcentagens } from "../components/porcentagens";
 const style = require("../components/styles").styler
-export class QuadroGeralCidade extends Component {
+export class QuadroComum extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -20,9 +20,9 @@ export class QuadroGeralCidade extends Component {
         this.getDados()
     }
     getDados = async () => {
-        let url = "https://apiccb.cdamorais.com/selectDadosCidade.php"
+        let url = "https://apiccb.cdamorais.com/selectDadosComum.php"
         let data = {
-            cidade: this.props.route.params.id_cidade
+            setor: this.props.route.params.id
         }
         let resposta = await fetch(url, {
             method: 'POST',
@@ -48,10 +48,10 @@ export class QuadroGeralCidade extends Component {
     }
     render() {
         var total = parseFloat(this.state.total)
-        var total_real = total + parseFloat(this.state.organistas)
+        var total_real = total + this.state.organistas
         return (
             <View style={style.container}>
-                <Text style={style.titulo}>{this.props.route.params.cidade}</Text>
+                <Text style={style.titulo}>{this.props.route.params.nome}</Text>
                 <Text style={style.subtitulo}> Quadro GERAL</Text>
                 <Porcentagens
                     metais={this.state.metais}

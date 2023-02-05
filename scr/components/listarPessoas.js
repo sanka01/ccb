@@ -31,7 +31,7 @@ render(){
             <FlatList
               data={this.state.pessoas}
               renderItem={renderPessoa}
-              keyExtractor={(item, index) => index.toString()}
+              keyExtractor={(item, index) => item.toString()}
             />
           )}
         </View>

@@ -1,41 +1,54 @@
 import React, { Component } from "react";
 
-import { Text, TouchableOpacity, View } from "react-native";
+import { FlatList, Text, TouchableOpacity, View } from "react-native";
 
 const styler = require("../components/styles").styler
+
+
 export class Cidades extends Component {
     constructor(props) {
         super(props)
+        this.state = {
+            cidades: []
+        }
     }
+    getCidades = async () => {
+        let url = "https://apiccb.cdamorais.com/selectCidades.php"
+        let resposta = await fetch(url)
+        let data = await resposta.json()
+        this.setState({ cidades: data[0]['Rows'], loading: false })
 
+    }
+    componentDidMount(){
+        this.getCidades()
+    }
+    getCidade = ({ item }) => {
+    
+        return (
+            <TouchableOpacity style={styler.botao} onPress={
+                () => this.props.navigation.navigate('QuadroGeralCidade', { cidade: item.nome, id_cidade: item.id })
+            }>
+                <Text style={styler.texto}>{item.nome}</Text>
+            </TouchableOpacity>
+        )
+    }
     render() {
         return (
             <>
                 <View style={styler.container_column}>
                     <Text style={styler.titulo}>ESCOLHA UMA CIDADE</Text>
+                    {this.state.loading && <Text>Carregando...</Text>}
+                    {!this.state.loading && (
+
+                        <FlatList
+                            data={this.state.cidades}
+                            renderItem={this.getCidade}
+                            keyExtractor={(i, j) => i.toString()}
+
+                        />
+                    )}
+
                     <TouchableOpacity style={styler.botao} onPress={
-                        () => this.props.navigation.navigate('QuadroGeralCidade', {cidade: 'Cezarina', id_cidade: '3'})
-                    }>
-                        <Text style={styler.texto}>CEZARINA</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={styler.botao}  >
-                        <Text style={styler.texto}>EDÉIA</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={styler.botao}>
-                        <Text style={styler.texto}>INDIARA</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={styler.botao}  >
-                        <Text style={styler.texto}>JANDAIA</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={styler.botao} >
-                        <Text style={styler.texto}>PALMEIRAS</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={styler.botao}onPress={
                         () => this.props.navigation.navigate('Home')} >
                         <Text style={styler.texto}>INÍCIO</Text>
                     </TouchableOpacity>
@@ -47,3 +60,4 @@ export class Cidades extends Component {
         )
     }
 }
+

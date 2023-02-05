@@ -10,9 +10,13 @@ export class ListarBotoesComums extends Component{
     render(){
         return(
             <TouchableOpacity style={[style.botao, {margin: 10}]} onPress={
-                () => this.props.navigation.navigate('QuadroGeralCidade', {cidade: 'Cezarina', id_cidade: '3'})
+                () => this.props.navigation.navigate('QuadroComum', {
+                    cidade: this.props.cidade, 
+                    id_cidade: this.props.id_cidade,
+                    nome: this.props.nome,
+                    id: this.props.id})
             }>
-                <Text style={style.texto}>Comum {this.props.nome}</Text>
+                <Text style={style.texto}>{this.props.nome}</Text>
             </TouchableOpacity>
         )
     }
