@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { FlatList, Text, StatusBar, View } from "react-native";
-import { ListarBotoesComums } from "../components/listarBotoesComuns";
+import { FlatList, Text, View } from "react-native";
 import { Porcentagens } from "../components/porcentagens";
 
 const style = require("../components/styles").styler
@@ -9,53 +8,40 @@ export class TabelaMusicos extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            cordas: 5,
-            metais: 3,
-            madeiras: 5,
-            organistas: 9,
+            cordas: 0,
+            metais: 0,
+            madeiras: 0,
+            organistas: 0,
+            total: 0,
+            musicos: []
         }
     }
 
+    componentDidMount(){
+        this.getDados()
+    }
+    getDados = async () => {
+        let url = "https://apiccb.cdamorais.com/selectDadosCidade.php"
+        let data = {
+            cidade: this.props.route.params.id_cidade
+        }
+        let resposta = await fetch(url, {
+            method: 'POST',
+            body: JSON.stringify(data)
+        })
+        let dados = await resposta.json()
+        this.setState({
+            cordas: dados[0]["cordas"], madeira: dados[0]["madeira"], metais: dados[0]["metais"], total: dados[0]["musicos"],
+            musicos: dados[2], loading: false
+        })
 
+    }
 
     render() {
-        var total = (this.state.cordas + this.state.madeiras + this.state.metais)
-        var total_real = total + this.state.organistas
+        var total = parseFloat(this.state.total)
+        var total_real = total + parseFloat(this.state.organistas)
 
-        var musicos = [
-            {
-                id: '1',
-                nome: 'nome 1',
-                instrumento: 'instrumento 1'
-            },
-            {
-                id: '2',
-                nome: 'nome 2',
-                instrumento: 'instrumento 2'
-
-            },
-            {
-                id: '3',
-                nome: 'nome 3',
-                instrumento: 'instrumento 3'
-            },
-            {
-                id: '4',
-                nome: 'nome 4',
-                instrumento: 'instrumento 1'
-            },
-            {
-                id: '5',
-                nome: 'nome 5',
-                instrumento: 'instrumento 2'
-
-            },
-            {
-                id: '6',
-                nome: 'nome 6',
-                instrumento: 'instrumento 3'
-            }
-        ]
+        
 
 
         return (
@@ -75,13 +61,18 @@ export class TabelaMusicos extends Component {
 
                 </View>
 
+                {this.state.loading && <Text>Carregando...</Text>}
+                {!this.state.loading && (
 
                 <FlatList
-                    data={musicos}
+                    data={this.state.musicos}
                     renderItem={this.renderItem}
                     keyExtractor={item => item.id}
+                    contentContainerStyle={{ paddingBottom: 300 }}
+
 
                 />
+                )}
 
 
             </View>
@@ -91,16 +82,18 @@ export class TabelaMusicos extends Component {
     renderItem({ item }) {
         return (
             <Item
-                nome={item.nome}
-                instrumento={item.instrumento}
+                nome={item.nome_pessoa}
+                instrumento={item.nome_instrumento}
+                comum={item.setor}
             />
         )
     }
 }
 
-const Item = ({ nome, instrumento }) => (
+const Item = ({ nome, instrumento, comum }) => (
     <View style={style.itemMusico}>
         <Text style={style.tituloMusico}>{nome}</Text>
-        <Text style={style.texto}>{instrumento}</Text>
+        <Text style={style.texto}>Instrumento: {instrumento}</Text>
+        <Text style={style.texto}>Comum: {comum}</Text>
     </View>
 )

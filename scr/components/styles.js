@@ -90,7 +90,7 @@ export const styler = StyleSheet.create(
         },
         itemMusico: {
             backgroundColor: azulEscuro,
-            padding: 5,
+            padding: 10,
             marginVertical: 2,
             marginHorizontal: 5,
         },

@@ -1,6 +1,6 @@
 import { Picker } from "@react-native-picker/picker";
 import React, { Component } from "react";
-import { Button, TextInput, View } from "react-native";
+import { Button, Text, TextInput, View } from "react-native";
 import ListarCidades from "./listarCidades";
 import { ListarComuns } from "./listarComuns";
 import ListarFamilia from "./listarFamilia";
@@ -93,6 +93,7 @@ class RegistroPessoa extends Component {
                     style={Style.textoInput}
                     onChangeText={nome => this.setState({ nome: nome })}
                 />
+                <Text>Status</Text>
                 <Picker
                     selectedValue={this.state.status}
                     onValueChange={(itemValue, itemIndex) => {
@@ -104,10 +105,14 @@ class RegistroPessoa extends Component {
                     <Picker.Item label="Oficializado" value='2' />
                     <Picker.Item label="Não Oficializado" value='3' />
                 </Picker>
+                <Text>Cidade</Text>
                 <ListarCidades estado={this.state.estado} cidade={this.setCidade} />
-                <ListarFamilia familia={this.setFamilia} />
-                <ListarInstrumentos familia={this.state.familia} instrumento={this.setInstrumento} />
+                <Text>Comum</Text>
                 <ListarComuns setor={this.setSetor} cidade={this.state.cidade} />
+                <Text>Familia de instrumento</Text>
+                <ListarFamilia familia={this.setFamilia} />
+                <Text>Instrumento</Text>
+                <ListarInstrumentos familia={this.state.familia} instrumento={this.setInstrumento} />
                 <Button
                     style={Style.button}
                     title='Registrar'

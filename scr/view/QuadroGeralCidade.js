@@ -70,7 +70,7 @@ export class QuadroGeralCidade extends Component {
                     <TouchableOpacity style={[style.botao, { margin: 10 }]} onPress={
                         () => this.props.navigation.navigate('TabelaMusicos', {
                             cidade: this.props.route.params.cidade,
-                            cidade_id: this.props.route.params.cidade_id
+                            id_cidade: this.props.route.params.id_cidade
                         })
                     }>
                         <Text style={style.texto}>Lista Geral</Text>
