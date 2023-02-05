@@ -79,6 +79,14 @@ export const styler = StyleSheet.create(
             padding: 10,
             fontSize: 20,
         },
+        textoInput: {
+            padding: 10,
+            fontSize: 16,
+            color: "#000", 
+            borderBottomColor: "#517FFC", 
+            borderBottomWidth: 1, 
+            borderRadius: 15
+        },
         itemMusico: {
             backgroundColor: azulEscuro,
             padding: 5,

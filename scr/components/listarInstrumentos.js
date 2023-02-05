@@ -29,7 +29,8 @@ export class ListarInstrumentos extends Component {
     }
     instrumento = () => {
         return this.state.instrumentos.map((instrumento) => {
-            if (instrumento.id_familia == this.props.id_familia) {
+            
+            if (instrumento.familia == this.props.familia) {
                 return <Picker.Item label={instrumento.nome} key={instrumento.id} value={instrumento.id} />
             } else {
                 return null
@@ -44,7 +45,6 @@ export class ListarInstrumentos extends Component {
                 {!this.state.loading && (
                     <Picker
                         selectedValue={this.state.instrumento}
-                        style={{ height: 50, width: 150 }}
                         onValueChange={(itemValue, itemIndex) => {
                             this.setState({instrumento: itemValue})
                             this.props.instrumento(itemValue)

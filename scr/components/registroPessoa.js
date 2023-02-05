@@ -1,3 +1,4 @@
+import { Picker } from "@react-native-picker/picker";
 import React, { Component } from "react";
 import { Button, TextInput, View } from "react-native";
 import ListarCidades from "./listarCidades";
@@ -12,19 +13,20 @@ class RegistroPessoa extends Component {
         super(props)
         this.state = {
             nome: "",
-            status: "",
+            status: "0",
             cidade: "2",
             estado: "1",
             setor: "2",
             familia: "1",
-            instrumento: ""
+            instrumento: "1"
         }
     }
 
 
 
+
     register = () => {
-        if (!nome) {
+        if (!this.state.nome) {
             alert("Erro, campo obrigatorio faltando")
         } else {
             let insertAPIURL = "https://apiccb.cdamorais.com/inserir.php"
@@ -88,9 +90,20 @@ class RegistroPessoa extends Component {
                 <TextInput
                     placeholder='Nome Completo'
                     placeholderTextColor={"grey"}
-                    style={[Style.texto, { color: "#000" }]}
-                    onChangeText={nome => this.state.nome = nome}
+                    style={Style.textoInput}
+                    onChangeText={nome => this.setState({ nome: nome })}
                 />
+                <Picker
+                    selectedValue={this.state.status}
+                    onValueChange={(itemValue, itemIndex) => {
+                        this.setState({ status: itemValue })
+                    }}
+                >
+                    <Picker.Item label="Aluno" value='0' />
+                    <Picker.Item label="RJM" value='1' />
+                    <Picker.Item label="OF" value='2' />
+                    <Picker.Item label="NOF" value='3' />
+                </Picker>
                 <ListarCidades estado={this.state.estado} cidade={this.setCidade} />
                 <ListarFamilia familia={this.setFamilia} />
                 <ListarInstrumentos familia={this.state.familia} instrumento={this.setInstrumento} />

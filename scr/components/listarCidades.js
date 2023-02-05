@@ -44,7 +44,6 @@ class ListarCidades extends Component {
                 {!this.state.loading && (
                     <Picker
                         selectedValue={this.state.cidade}
-                        style={{ height: 50, width: 150 }}
                         onValueChange={(itemValue, itemIndex) => {
                             this.setState({cidade: itemValue})
                             this.props.cidade(itemValue)

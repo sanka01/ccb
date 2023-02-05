@@ -36,10 +36,9 @@ class ListarFamilia extends Component {
                 {!this.state.loading && (
                     <Picker
                         selectedValue={this.state.familia}
-                        style={{ height: 50, width: 150 }}
                         onValueChange={(itemValue, itemIndex) => { 
-                            this.setState({ estado: itemValue }) 
-                            this.props.estado(itemValue)
+                            this.setState({ familia: itemValue }) 
+                            this.props.familia(itemValue)
                         }}
                     >
                         {this.familia()}
