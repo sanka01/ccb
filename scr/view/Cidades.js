@@ -35,8 +35,9 @@ export class Cidades extends Component {
     render() {
         return (
             <>
-                <View style={styler.container_column}>
+                <View style={{ flex: 0 }}>
                     <Text style={styler.titulo}>ESCOLHA UMA CIDADE</Text>
+                    <Text>&nbsp;</Text>
                     {this.state.loading && <Text>Carregando...</Text>}
                     {!this.state.loading && (
 

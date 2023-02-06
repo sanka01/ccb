@@ -18,37 +18,42 @@ class Home extends Component {
                     }>
                         <Text style={styler.texto}>CIDADES</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styler.botao_quadrado}  >
-                        <Text style={styler.texto}>REGIÃO</Text>
+                    <TouchableOpacity style={styler.botao_quadrado} onPress={
+                        () => this.props.navigation.navigate('TabelaMusicos', {
+                            cidade: "Indiara",
+                            id_cidade: 2
+                        })
+                    }>
+                        <Text style={styler.texto}>LISTA GERAL (INDIARA-GO)</Text>
                     </TouchableOpacity>
                 </View>
 
                 <View style={styler.container_row}>
                     <TouchableOpacity style={styler.botao_quadrado} onPress={
-                        () => this.props.navigation.navigate('CadastroMusico')
+                        () => this.props.navigation.navigate('CadastroMusico')            
                     }>
                         <Text style={styler.texto}>CADASTRAR MÚSICO</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styler.botao_quadrado}  >
-                        <Text style={styler.texto}>RELATÓRIO GERAL</Text>
+                        <Text style={styler.texto}>QUADRO GERAL DA ORQUESTRA</Text>
                     </TouchableOpacity>
                 </View>
 
                 <View style={styler.container_row}>
                     <TouchableOpacity style={styler.botao_quadrado} >
-                        <Text style={styler.texto}>ALTERAR DADOS</Text>
+                        <Text style={styler.texto}>ENSAIOS LOCAIS</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styler.botao_quadrado} >
-                        <Text style={styler.texto}>RELATÓRIO POR CIDADE</Text>
+                        <Text style={styler.texto}>ENSAIO REGIONAL</Text>
                     </TouchableOpacity>
                 </View>
 
                 <View style={styler.container_row}>
-                    <TouchableOpacity style={styler.botao_quadrado}  >
-                        <Text style={styler.texto}>EXCLUIR CADASTRO</Text>
-                    </TouchableOpacity>
                     <TouchableOpacity style={styler.botao_quadrado}  >
                         <Text style={styler.texto}>AGENDA</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styler.botao_quadrado}  >
+                        <Text style={styler.texto}>SOBRE O APP</Text>
                     </TouchableOpacity>
                 </View>
 

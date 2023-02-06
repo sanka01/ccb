@@ -3,8 +3,8 @@ import '@expo/match-media'
 import { useMediaQuery } from "react-responsive"
 
 const branco = "#fff"
-const azulClaro = "#02A1F5"
-const azulEscuro = "#245975"
+const azulClaro = "#3C93C2"
+const azulEscuro = "#56798C"
 
 
 export const styler = StyleSheet.create(
@@ -54,14 +54,14 @@ export const styler = StyleSheet.create(
             alignSelf: "center"
         },
         botao: {
-            width: 300,
+            /* width: 400, */
             height: 50,
             backgroundColor: azulClaro,
             justifyContent: "center",
             textAlign: "center",
             borderColor: azulEscuro,
             borderWidth: 1,
-            borderRadius: 25,
+            borderRadius: 10,
             margin: 5,
         },
         botao_quadrado: {

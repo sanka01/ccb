@@ -92,8 +92,8 @@ export class TabelaMusicos extends Component {
 
 const Item = ({ nome, instrumento, comum }) => (
     <View style={style.itemMusico}>
-        <Text style={style.tituloMusico}>{nome}</Text>
-        <Text style={style.texto}>Instrumento: {instrumento}</Text>
-        <Text style={style.texto}>Comum: {comum}</Text>
+        <Text style={style.tituloMusico}>{nome}  |  {comum}</Text>
+        {/* <Text style={style.texto}>Instrumento: {instrumento}</Text>**/ }
+        <Text style={style.tituloMusico}>Instrumento:  {instrumento}</Text>
     </View>
 )
