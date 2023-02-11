@@ -3,8 +3,9 @@ import '@expo/match-media'
 import { useMediaQuery } from "react-responsive"
 
 const branco = "#fff"
-const azulClaro = "#3C93C2"
-const azulEscuro = "#56798C"
+const preto ="#000"
+const azulClaro = "#D4D9E2"
+const azulEscuro = "#033d60"
 
 
 export const styler = StyleSheet.create(
@@ -21,13 +22,14 @@ export const styler = StyleSheet.create(
         },
         quadro_info: {
             fontSize: 14,
-            color: branco,
+            color: azulEscuro,
             textAlign: "center",
             alignSelf: "center",
             padding: 15,
             borderRadius: 5,
             margin: 10,
-            backgroundColor: azulEscuro
+            borderWidth: 1,
+            borderColor: azulEscuro
         },
         row: {
             flexDirection: "row",
@@ -59,23 +61,20 @@ export const styler = StyleSheet.create(
             backgroundColor: azulClaro,
             justifyContent: "center",
             textAlign: "center",
-            borderColor: azulEscuro,
-            borderWidth: 1,
             borderRadius: 10,
             margin: 5,
         },
         botao_quadrado: {
-            width: 150,
-            height: 150,
+            width: "49%",
+            height: "99%",
             backgroundColor: azulClaro,
-            justifyContent: "center",
             textAlign: "center",
             borderColor: azulEscuro,
             borderWidth: 1,
-            borderRadius: 25
+            borderRadius: 10
         },
         texto: {
-            color: branco,
+            color: azulEscuro,
             textAlign: "center",
             padding: 10,
             fontSize: 20,
@@ -83,20 +82,20 @@ export const styler = StyleSheet.create(
         textoInput: {
             padding: 10,
             fontSize: 16,
-            color: "#000", 
-            borderBottomColor: "#517FFC", 
+            color: preto, 
+            borderBottomColor: azulEscuro, 
             borderBottomWidth: 1, 
             borderRadius: 15
         },
         itemMusico: {
-            backgroundColor: azulEscuro,
+            backgroundColor: azulClaro,
             padding: 10,
             marginVertical: 2,
             marginHorizontal: 5,
         },
         tituloMusico: {
             fontSize: 18,
-            color: branco
+            color: azulEscuro
         }
 
     }

@@ -7,6 +7,10 @@ import { QuadroGeralCidade } from './scr/view/QuadroGeralCidade';
 import { TabelaMusicos } from './scr/view/TabelaMusicos';
 import { CadastroMusico } from './scr/view/CadastroMusico';
 import { QuadroComum } from './scr/view/QuadroComum';
+import { TabelaMusicosCidade } from './scr/view/TabelaMusicosCidade';
+import { QuadroGeral } from './scr/view/QuadroGeral';
+import { Agenda } from './scr/view/Agenda';
+import { Sobre } from './scr/view/Sobre';
 
 
 const Stack = createNativeStackNavigator();
@@ -44,8 +48,28 @@ class App extends Component {
             options={{title: 'Quadro de Orquestra'}}
           />
           <Stack.Screen
+            name="TabelaMusicosCidade"
+            component={TabelaMusicosCidade}
+            options={{title: 'Quadro de Orquestra'}}
+          />
+          <Stack.Screen
             name="CadastroMusico"
             component={CadastroMusico}
+            options={{title: 'Quadro de Orquestra'}}
+          />
+          <Stack.Screen
+            name="QuadroGeral"
+            component={QuadroGeral}
+            options={{title: 'Quadro de Orquestra'}}
+          />
+          <Stack.Screen
+            name="Agenda"
+            component={Agenda}
+            options={{title: 'Quadro de Orquestra'}}
+          />
+          <Stack.Screen
+            name="Sobre"
+            component={Sobre}
             options={{title: 'Quadro de Orquestra'}}
           />
         </Stack.Navigator>

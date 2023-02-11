@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { FlatList, Text, TouchableOpacity, View } from "react-native";
-import { ListarBotoesComums } from "../components/listarBotoesComuns";
 import { Porcentagens } from "../components/porcentagens";
 const style = require("../components/styles").styler
 export class QuadroComum extends Component {
@@ -30,25 +29,22 @@ export class QuadroComum extends Component {
         })
         let dados = await resposta.json()
         this.setState({
-            cordas: dados[0]["cordas"], madeira: dados[0]["madeira"], metais: dados[0]["metais"], total: dados[0]["musicos"],
-            comuns: dados[1], loading: false
+            cordas: dados[0]["cordas"], madeiras: dados[0]["madeira"], metais: dados[0]["metais"], total: dados[0]["musicos"],
+            organistas: dados[0]["organistas"],
+            musicos: dados[1], loading: false
         })
 
     }
-    getComuns = ({ item }) => {
+     renderItem({ item }) {
         return (
-            <ListarBotoesComums
-                nome={item.nome}
-                id={item.id}
-                cidade={this.props.route.params.cidade}
-                id_cidade={this.props.route.params.id_cidade}
-                navigation={this.props.navigation} />
+            <Item
+                nome={item.nome_pessoa}
+                instrumento={item.nome_instrumento}
+            />
         )
-
     }
     render() {
         var total = parseFloat(this.state.total)
-        var total_real = total + this.state.organistas
         return (
             <View style={style.container}>
                 <Text style={style.titulo}>{this.props.route.params.nome}</Text>
@@ -60,33 +56,35 @@ export class QuadroComum extends Component {
                     organistas={this.state.organistas} />
                 <View style={style.row}>
                     <Text style={style.quadro_info}>
-                        Total de músicos = {total_real}
+                        Total de músicos = {total}
                     </Text>
 
 
                 </View>
 
-                <View style={style.container}>
-                    <TouchableOpacity style={[style.botao, { margin: 10 }]} onPress={
-                        () => this.props.navigation.navigate('TabelaMusicos', {
-                            cidade: this.props.route.params.cidade,
-                            cidade_id: this.props.route.params.cidade_id
-                        })
-                    }>
-                        <Text style={style.texto}>Lista Geral</Text>
-                    </TouchableOpacity>
+
                     {this.state.loading && <Text>Carregando...</Text>}
                     {!this.state.loading && (
+
                         <FlatList
-                            data={this.state.comuns}
-                            renderItem={this.getComuns}
-                            keyExtractor={(item, index) => item.toString()}
+                            data={this.state.musicos}
+                            renderItem={this.renderItem}
+                            keyExtractor={item => item.id}
+                            contentContainerStyle={{ paddingBottom: 300 }}
+
 
                         />
                     )}
 
-                </View>
             </View>
         )
     }
 }
+
+const Item = ({ nome, instrumento }) => (
+    <View style={style.itemMusico}>
+        <Text style={style.tituloMusico}>{nome} </Text>
+        {/* <Text style={style.texto}>Instrumento: {instrumento}</Text>**/}
+        <Text style={style.tituloMusico}>Instrumento:  {instrumento}</Text>
+    </View>
+)

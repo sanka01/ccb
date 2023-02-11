@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { FlatList, Text, TouchableOpacity, View } from "react-native";
-import { ListarBotoesComums } from "../components/listarBotoesComuns";
+import { FlatList, Text, View } from "react-native";
 import { Porcentagens } from "../components/porcentagens";
+
 const style = require("../components/styles").styler
-export class QuadroGeralCidade extends Component {
+
+export class TabelaMusicosCidade extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -12,11 +13,11 @@ export class QuadroGeralCidade extends Component {
             madeiras: 0,
             organistas: 0,
             total: 0,
-            comuns: [],
-            loading: true
+            musicos: []
         }
     }
-    componentDidMount() {
+
+    componentDidMount(){
         this.getDados()
     }
     getDados = async () => {
@@ -32,23 +33,19 @@ export class QuadroGeralCidade extends Component {
         this.setState({
             cordas: dados[0]["cordas"], madeiras: dados[0]["madeira"], metais: dados[0]["metais"], total: dados[0]["musicos"],
             organistas: dados[0]["organistas"],
-            comuns: dados[1], loading: false
+            musicos: dados[2], loading: false
         })
 
     }
-    getComuns = ({ item }) => {
-        return (
-            <ListarBotoesComums
-                nome={item.nome}
-                id={item.id}
-                navigation={this.props.navigation} />
-        )
 
-    }
     render() {
         var total = parseFloat(this.state.total)
+
+        
+
+
         return (
-            <View style={style.container}>
+            <View style={{ flex: 0 }}>
                 <Text style={style.titulo}>{this.props.route.params.cidade}</Text>
                 <Text style={style.subtitulo}> Quadro GERAL</Text>
                 <Porcentagens
@@ -64,27 +61,39 @@ export class QuadroGeralCidade extends Component {
 
                 </View>
 
-                <View style={style.container}>
-                    <TouchableOpacity style={[style.botao, { margin: 10 }]} onPress={
-                        () => this.props.navigation.navigate('TabelaMusicosCidade', {
-                            cidade: this.props.route.params.cidade,
-                            id_cidade: this.props.route.params.id_cidade
-                        })
-                    }>
-                        <Text style={style.texto}>Lista Geral</Text>
-                    </TouchableOpacity>
-                    {this.state.loading && <Text>Carregando...</Text>}
-                    {!this.state.loading && (
-                        <FlatList
-                            data={this.state.comuns}
-                            renderItem={this.getComuns}
-                            keyExtractor={(item, index) => item.toString()}
+                {this.state.loading && <Text>Carregando...</Text>}
+                {!this.state.loading && (
 
-                        />
-                    )}
+                <FlatList
+                    data={this.state.musicos}
+                    renderItem={this.renderItem}
+                    keyExtractor={item => item.id}
+                    contentContainerStyle={{ paddingBottom: 300 }}
 
-                </View>
+
+                />
+                )}
+
+
             </View>
+        )
+
+    }
+    renderItem({ item }) {
+        return (
+            <Item
+                nome={item.nome_pessoa}
+                instrumento={item.nome_instrumento}
+                comum={item.setor}
+            />
         )
     }
 }
+
+const Item = ({ nome, instrumento, comum }) => (
+    <View style={style.itemMusico}>
+        <Text style={style.tituloMusico}>{nome}  |  {comum}</Text>
+        {/* <Text style={style.texto}>Instrumento: {instrumento}</Text>**/ }
+        <Text style={style.tituloMusico}>Instrumento:  {instrumento}</Text>
+    </View>
+)

@@ -21,7 +21,7 @@ export class TabelaMusicos extends Component {
         this.getDados()
     }
     getDados = async () => {
-        let url = "https://apiccb.cdamorais.com/selectDadosCidade.php"
+        let url = "https://apiccb.cdamorais.com/selectDadosRegiao.php"
         let data = {
             cidade: this.props.route.params.id_cidade
         }
@@ -31,15 +31,15 @@ export class TabelaMusicos extends Component {
         })
         let dados = await resposta.json()
         this.setState({
-            cordas: dados[0]["cordas"], madeira: dados[0]["madeira"], metais: dados[0]["metais"], total: dados[0]["musicos"],
-            musicos: dados[2], loading: false
+            cordas: dados[0]["cordas"], madeiras: dados[0]["madeira"], metais: dados[0]["metais"], total: dados[0]["musicos"],
+            organistas: dados[0]["organistas"],
+            musicos: dados[1], loading: false
         })
 
     }
 
     render() {
         var total = parseFloat(this.state.total)
-        var total_real = total + parseFloat(this.state.organistas)
 
         
 
@@ -55,7 +55,7 @@ export class TabelaMusicos extends Component {
                     organistas={this.state.organistas} />
                 <View style={style.row}>
                     <Text style={style.quadro_info}>
-                        Total de músicos = {total_real}
+                        Total de músicos = {total}
                     </Text>
 
 
