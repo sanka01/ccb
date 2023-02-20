@@ -3,7 +3,6 @@ import { Image, View, StyleSheet } from "react-native";
 const style = StyleSheet.create({
     container: {
         paddingTop: 0,
-        flex: 1,
         maxHeight: 100,
         justifyContent: "center",
         alignItems: "center",

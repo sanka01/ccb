@@ -96,7 +96,18 @@ export const styler = StyleSheet.create(
         tituloMusico: {
             fontSize: 18,
             color: azulEscuro
-        }
+        },
+        input: {
+            borderRadius: 5,
+            borderColor: '#ccc',
+            borderWidth: 1,
+            borderTopColor: "#FFF",
+            padding: 10,
+            marginBottom: 10,
+            width: '100%',
+            backgroundColor: '#fff',
+            color: '#000',
+          },
 
     }
 )
