@@ -1,49 +1,58 @@
-import React, {Component} from "react";
-import { Text, View } from "react-native";
+import React, { Component } from "react";
+import { FlatList, Text, View } from "react-native";
 import { styler } from "../components/styles";
 import { Divider } from '@rneui/themed';
 
 
-export class Agenda extends Component{
-    render(){
-        return(
+export class Agenda extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            agenda: [],
+            loading: true,
+        }
+    }
+    getAgenda = async () => {
+        let url = "https://apiccb.cdamorais.com/agenda.php"
+        let resposta = await fetch(url)
+        let data = await resposta.json()
+        this.setState({ agenda: data[0]['Rows'], loading: false })
+
+
+    }
+    componentDidMount() {
+        this.getAgenda()
+    }
+
+    getEnsaio = ({ item }) => {
+        return (
+            <>
+                <Text style={styler.subtitulo}>{item.nome}</Text>
+                <Text style={styler.texto}>{item.texto}</Text>
+                <Divider/>
+            </>
+
+        )
+    }
+    render() {
+        return (
             <View>
                 <Text style={styler.titulo}>Ensaios Locais</Text>
 
-                <Text style={styler.subtitulo}>Indiara - Central</Text>
-                <Text style={styler.texto}>1° quarta feira do mes</Text>
-                <Divider/>
+              
 
-                <Text style={styler.subtitulo}>Indiara - Vale do Sol</Text>
-                <Text style={styler.texto}>3° quarta feira dos meses impares</Text>
+                {this.state.loading && <Text>Carregando...</Text>}
+                {!this.state.loading && (
 
-                <Divider/>
-                
-                <Text style={styler.subtitulo}>Indiara - Vale do Sol</Text>
-                <Text style={styler.texto}>3° quarta feira dos meses impares</Text>
+                    <FlatList
+                        data={this.state.agenda}
+                        renderItem={this.getEnsaio}
+                        keyExtractor={(i, j) => i.toString()}
 
-                <Divider/>
-                
-                <Text style={styler.subtitulo}>Indiara - Vale do Sol</Text>
-                <Text style={styler.texto}>3° quarta feira dos meses impares</Text>
+                    />
+                )}
 
-                <Divider/>
-                
-                <Text style={styler.subtitulo}>Indiara - Vale do Sol</Text>
-                <Text style={styler.texto}>3° quarta feira dos meses impares</Text>
 
-                <Divider/>
-                
-                <Text style={styler.subtitulo}>Indiara - Vale do Sol</Text>
-                <Text style={styler.texto}>3° quarta feira dos meses impares</Text>
-
-                <Divider/>
-                
-                <Text style={styler.subtitulo}>Indiara - Vale do Sol</Text>
-                <Text style={styler.texto}>3° quarta feira dos meses impares</Text>
-
-                
-                
             </View>
         )
     }

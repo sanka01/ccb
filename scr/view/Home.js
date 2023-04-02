@@ -48,7 +48,7 @@ class Home extends Component {
                         <Text style={styler.texto}>ENSAIOS LOCAIS</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styler.botao_quadrado}  onPress={
-                        () => this.props.navigation.navigate('QuadroGeral')
+                        () => this.props.navigation.navigate('EditarMusico')
                     } >
                         <Text style={styler.texto}>ENSAIO REGIONAL</Text>
                     </TouchableOpacity>

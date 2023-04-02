@@ -8,10 +8,6 @@ export class LoginForm extends Component {
         this.state = {
             username: '',
             password: '',
-            usernameFocused: false,
-            passwordFocused: false,
-            animatedUsername: new Animated.Value(0),
-            animatedPassword: new Animated.Value(0),
         };
     }
     handleLogin() {
@@ -21,34 +17,7 @@ export class LoginForm extends Component {
         }
     }
 
-    handleFocus = (inputName) => {
-        const isUsername = inputName === 'username';
-        const animatedInput = isUsername ? this.state.animatedUsername : this.state.animatedPassword;
-        const targetValue = isUsername ? 1 : 2;
-
-        Animated.timing(animatedInput, {
-            toValue: targetValue,
-            duration: 200,
-            useNativeDriver: false,
-        }).start();
-
-        this.setState({ [`${inputName}Focused`]: true });
-    }
-
-    handleBlur = (inputName) => {
-        const isUsername = inputName === 'username';
-        const animatedInput = isUsername ? this.state.animatedUsername : this.state.animatedPassword;
-        const targetValue = isUsername ? 0 : 0;
-
-        Animated.timing(animatedInput, {
-            toValue: targetValue,
-            duration: 200,
-            useNativeDriver: false,
-        }).start();
-
-        this.setState({ [`${inputName}Focused`]: false });
-    }
-
+    
     render() {
         return (
             <View style={styles.container}>

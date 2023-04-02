@@ -30,7 +30,7 @@ class App extends Component {
   }
   render() {
 
-    const { isAuthenticated } = this.state;
+    const isAuthenticated = true;
 
     if (!isAuthenticated) {
       return (
