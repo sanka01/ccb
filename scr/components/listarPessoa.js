@@ -1,31 +1,14 @@
-import React from 'react'
-import {Text} from 'react-native'
-
+import React, { Component } from 'react';
+import { Text } from 'react-native';
+import StatusMusico from './getStatus';
 
 export const renderPessoa = ({ item }) => {
-    let statusText
-    let status = item.Status
-    let nome = item.nome_pessoa
-    switch (status) {
-        case '0':
-            statusText = 'Aluno';
-            break;
-        case '1':
-            statusText = 'RJM';
-            break;
-        case '2':
-            statusText = 'OF'
-            break;
-        case '3':
-            statusText = 'NOF'
-        default:
-            statusText = 'Aluno';
-    }
+  const nome = item.nome_pessoa;
+  const status = parseInt(item.Status);
 
-    return (
-        <Text>
-            {nome} - {statusText}
-            
-        </Text>
-    );
+  return (
+    <Text>
+      {nome} - <StatusMusico status={status} />
+    </Text>
+  );
 }
