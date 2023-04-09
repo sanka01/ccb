@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { FlatList, Text, TouchableOpacity, View } from "react-native";
 import { Porcentagens } from "../components/porcentagens";
+import StatusMusico from "../components/getStatus";
 const style = require("../components/styles").styler
 export class QuadroComum extends Component {
     constructor(props) {
@@ -35,12 +36,18 @@ export class QuadroComum extends Component {
         })
 
     }
-     renderItem({ item }) {
+    renderItem = ({item}) => {
         return (
-            <Item
-                nome={item.nome_pessoa}
-                instrumento={item.nome_instrumento}
-            />
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('EditarMusico', {id: item.id})}>
+                <View style={style.itemMusico}>
+                    <Text style={style.tituloMusico}>{item.nome_pessoa} | {item.setor}</Text>
+                    <Text style={style.tituloMusico}>Instrumento: {item.nome_instrumento}</Text>
+
+                    {item.telefone && <Text>Telefone: {item.telefone}</Text>}
+                    {item.email && <Text>Email: {item.email}</Text>}
+                    <StatusMusico status={item.status} />
+                </View>
+            </TouchableOpacity>
         )
     }
     render() {

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { FlatList, Text, View } from "react-native";
+import { FlatList, Text, TouchableOpacity, View } from "react-native";
 import { Porcentagens } from "../components/porcentagens";
+import StatusMusico from "../components/getStatus";
 
 const style = require("../components/styles").styler
 
@@ -17,7 +18,7 @@ export class TabelaMusicos extends Component {
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.getDados()
     }
     getDados = async () => {
@@ -37,13 +38,24 @@ export class TabelaMusicos extends Component {
         })
 
     }
+    renderItem = ({item}) => {
+        return (
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('EditarMusico', {id: item.id})}>
+                <View style={style.itemMusico}>
+                    <Text style={style.tituloMusico}>{item.nome_pessoa} | {item.setor}</Text>
+                    <Text style={style.tituloMusico}>Instrumento: {item.nome_instrumento}</Text>
+
+                    {item.telefone && <Text>Telefone: {item.telefone}</Text>}
+                    {item.email && <Text>Email: {item.email}</Text>}
+                    <StatusMusico status={item.status} />
+                </View>
+            </TouchableOpacity>
+        )
+    }
+
 
     render() {
         var total = parseFloat(this.state.total)
-
-        
-
-
         return (
             <View style={{ flex: 0 }}>
                 <Text style={style.titulo}>{this.props.route.params.cidade}</Text>
@@ -64,14 +76,14 @@ export class TabelaMusicos extends Component {
                 {this.state.loading && <Text>Carregando...</Text>}
                 {!this.state.loading && (
 
-                <FlatList
-                    data={this.state.musicos}
-                    renderItem={this.renderItem}
-                    keyExtractor={item => item.id}
-                    contentContainerStyle={{ paddingBottom: 300 }}
+                    <FlatList
+                        data={this.state.musicos}
+                        renderItem={this.renderItem}
+                        keyExtractor={item => item.id}
+                        contentContainerStyle={{ paddingBottom: 300 }}
 
 
-                />
+                    />
                 )}
 
 
@@ -79,21 +91,6 @@ export class TabelaMusicos extends Component {
         )
 
     }
-    renderItem({ item }) {
-        return (
-            <Item
-                nome={item.nome_pessoa}
-                instrumento={item.nome_instrumento}
-                comum={item.setor}
-            />
-        )
-    }
+
 }
 
-const Item = ({ nome, instrumento, comum }) => (
-    <View style={style.itemMusico}>
-        <Text style={style.tituloMusico}>{nome}  |  {comum}</Text>
-        {/* <Text style={style.texto}>Instrumento: {instrumento}</Text>**/ }
-        <Text style={style.tituloMusico}>Instrumento:  {instrumento}</Text>
-    </View>
-)

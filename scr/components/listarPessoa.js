@@ -6,9 +6,15 @@ export const renderPessoa = ({ item }) => {
   const nome = item.nome_pessoa;
   const status = parseInt(item.Status);
 
+  console.log(item)
   return (
-    <Text>
-      {nome} - <StatusMusico status={status} />
-    </Text>
+    <>
+      <Text>
+        {nome} - <StatusMusico status={status} />
+      </Text>
+      <Text>
+AAAAAAAAAAA
+      </Text>
+    </>
   );
 }

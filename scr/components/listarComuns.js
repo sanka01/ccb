@@ -27,7 +27,7 @@ export class ListarComuns extends Component {
         this.props.cidade = data[4][0]
 
     }
-    setor = () => {
+    getSetor = () => {
         return this.state.setores.map((setor) => {
             if (setor.cidade == this.props.cidade) {
                 return <Picker.Item label={setor.nome} key={setor.id} value={setor.id} />
@@ -35,6 +35,7 @@ export class ListarComuns extends Component {
                 return null
             }
         })
+
 
     }
     render() {
@@ -49,7 +50,7 @@ export class ListarComuns extends Component {
                             this.props.setor(itemValue)
                         } }
                     >
-                        {this.setor()}
+                        {this.getSetor()}
 
                     </Picker>
                 )}

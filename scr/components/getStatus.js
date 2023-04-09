@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import { Text } from 'react-native';
 
 class StatusMusico extends Component {
-  getStatusName(status) {
-    switch (status) {
-      case 0:
-        return "Aluno";
-      case 1:
+  getStatusName() {
+    switch (this.props.status) {
+      case '0':
+        return "APR";
+      case '1':
         return "RJM";
-      case 2:
-        return "OF";
-      case 3:
+      case '2':
+        return "OFC";
+      case '3':
         return "NOF";
       default:
         return "Aluno";
@@ -18,11 +18,10 @@ class StatusMusico extends Component {
   }
 
   render() {
-    const { status } = this.props;
-    const statusName = this.getStatusName(status);
+    const statusName = this.getStatusName();
 
     return (
-      <Text>{statusName}</Text>
+      <Text>Status: {statusName}</Text>
     );
   }
 }

@@ -47,6 +47,7 @@ class ListarCidades extends Component {
                         onValueChange={(itemValue, itemIndex) => {
                             this.setState({cidade: itemValue})
                             this.props.cidade(itemValue)
+                        
                         } }
                     >
                         {this.cidade()}

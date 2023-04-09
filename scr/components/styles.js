@@ -55,6 +55,10 @@ export const styler = StyleSheet.create(
             paddingTop: 20,
             alignSelf: "center"
         },
+        botao_deletar:{
+            backgroundColor: "#F53F3C",
+            marginTop: 10
+        },
         botao: {
             /* width: 400, */
             height: 50,

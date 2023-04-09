@@ -13,17 +13,37 @@ class RegistroPessoa extends Component {
         super(props)
         this.state = {
             nome: "",
+            email: "",
+            telefone: "",
             status: "0",
             cidade: "2",
             estado: "1",
             setor: "2",
             familia: "1",
-            instrumento: "1"
+            instrumento: "1",
+            setores: [],
+            cidades: [],
+            instrumentos: [],
+            familias: []
         }
     }
 
 
+    getDados = async () => {
+        let url = "https://apiccb.cdamorais.com/selectdadoscadastro.php"
+        let resposta = await fetch(url)
+        let data = await resposta.json()
+        this.setState({
+            cidades: data[1],
+            familias: data[2],
+            instrumentos: data[3],
+            setores: data[4]
+        })
+    }
 
+    componentDidMount() {
+        this.getDados()
+    }
 
     register = () => {
         if (!this.state.nome) {
@@ -38,6 +58,8 @@ class RegistroPessoa extends Component {
 
             let Data = {
                 nome: this.state.nome,
+                email: this.state.email,
+                telefone: this.state.telefone,
                 status: this.state.status,
                 cidade: this.state.cidade,
                 estado: this.state.estado,
@@ -59,19 +81,35 @@ class RegistroPessoa extends Component {
                     alert("Error" + error);
                 })
 
-
+            
         }
     }
 
 
     setCidade = (cidadeChild) => {
+
+        for (let i = 0; i < this.state.setores.length; i++) {
+            if (this.state.setores[i].cidade === cidadeChild) {
+                this.setState({ setor: this.state.setores[i].id });
+                break;
+            }
+        }
+
         this.setState({ cidade: cidadeChild })
+
     }
     setEstado = (estadoChild) => {
         this.setState({ estado: estadoChild })
     }
 
     setFamilia = (familiaChild) => {
+        for (let i = 0; i < this.state.instrumentos.length; i++) {
+            if (this.state.instrumentos[i].familia === familiaChild) {
+                this.setState({ instrumento: this.state.instrumentos[i].id });
+                break;
+            }
+        }
+
         this.setState({ familia: familiaChild })
     }
 
@@ -92,6 +130,18 @@ class RegistroPessoa extends Component {
                     placeholderTextColor={"grey"}
                     style={Style.textoInput}
                     onChangeText={nome => this.setState({ nome: nome })}
+                />
+                <TextInput
+                    placeholder='E-mail'
+                    placeholderTextColor={"grey"}
+                    style={Style.textoInput}
+                    onChangeText={email => this.setState({ email: email })}
+                />
+                <TextInput
+                    placeholder='Telefone'
+                    placeholderTextColor={"grey"}
+                    style={Style.textoInput}
+                    onChangeText={telefone => this.setState({ telefone: telefone })}
                 />
                 <Text>Status</Text>
                 <Picker
