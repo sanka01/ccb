@@ -24,7 +24,7 @@ class Home extends Component {
                             id_cidade: 2
                         })
                     }>
-                        <Text style={styler.texto}>LISTA GERAL (INDIARA-GO)</Text>
+                        <Text style={styler.texto}>LISTA GERAL (REGIÃO INDIARA-GO)</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -37,7 +37,7 @@ class Home extends Component {
                     <TouchableOpacity style={styler.botao_quadrado} onPress={
                         () => this.props.navigation.navigate('QuadroGeral')
                     } >
-                        <Text style={styler.texto}>QUADRO GERAL DA ORQUESTRA</Text>
+                        <Text style={styler.texto}>RELATÓRIO GERAL DA ORQUESTRA</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -45,12 +45,12 @@ class Home extends Component {
                     <TouchableOpacity style={styler.botao_quadrado}  onPress={
                         () => this.props.navigation.navigate('QuadroGeral')
                     } >
-                        <Text style={styler.texto}>ENSAIOS LOCAIS</Text>
+                        <Text style={styler.texto}>FREQUÊNCIA - ENSAIOS LOCAIS</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styler.botao_quadrado}  onPress={
                         () => this.props.navigation.navigate('QuadroGeral')
                     } >
-                        <Text style={styler.texto}>ENSAIO REGIONAL</Text>
+                        <Text style={styler.texto}>FRQUÊNCIA - ENSAIO REGIONAL</Text>
                     </TouchableOpacity>
                 </View>
 
