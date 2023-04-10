@@ -21,6 +21,7 @@ export class EditarMusico extends Component {
             setor: 0,
             familia: 0,
             telefone: "",
+            email: "",
             estados: [],
             cidades: [],
             familias: [],
@@ -85,6 +86,7 @@ export class EditarMusico extends Component {
             .then((response) => response.json())
             .then((response) => {
                 alert(response[0].Message);
+                this.props.navigation.navigate("Home")
             })
             .catch((error) => {
                 alert("Error" + error);
@@ -218,7 +220,6 @@ export class EditarMusico extends Component {
                 <Divider style={{ margin: 20 }} />
                 <Button
                     color="#F53F3C"
-
                     title="Deletar"
                     onPress={this.confirmarExclusao} />
 
@@ -235,11 +236,6 @@ export class EditarMusico extends Component {
                                 <Text style={styles.buttonText}>Não</Text>
                             </TouchableOpacity>
                         </View>
-                        <TouchableOpacity style={Style.botao} onPress={
-                        () => this.props.navigation.navigate('Home')
-                    }>
-                        <Text style={Style.texto}>Inicio</Text>
-                    </TouchableOpacity>
                     </View>
                 </Modal>
 
@@ -247,39 +243,40 @@ export class EditarMusico extends Component {
 
         )
     }
-}      
+}
 const styles = StyleSheet.create({
     modalContainer: {
-        backgroundColor: '#FFFFFF',
         borderRadius: 16,
         padding: 16,
+        height: "50%",
+        justifyContent: 'flex-end',
         alignItems: 'center',
-      },
-      modalTitle: {
+    },
+    modalTitle: {
         fontSize: 18,
         fontWeight: 'bold',
         marginBottom: 16,
-      },
-      buttonsContainer: {
+    },
+    buttonsContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         width: '100%',
-      },
-      button: {
+    },
+    button: {
         borderRadius: 8,
         padding: 8,
         minWidth: 80,
         alignItems: 'center',
-      },
-      buttonSim: {
+    },
+    buttonSim: {
         backgroundColor: '#FF0000',
-      },
-      buttonNao: {
+    },
+    buttonNao: {
         backgroundColor: '#CCCCCC',
-      },
-      buttonText: {
+    },
+    buttonText: {
         color: '#FFFFFF',
         fontWeight: 'bold',
-      },
+    },
 
 })
