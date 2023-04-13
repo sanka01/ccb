@@ -13,7 +13,6 @@ export const renderPessoa = ({ item }) => {
         {nome} - <StatusMusico status={status} />
       </Text>
       <Text>
-AAAAAAAAAAA
       </Text>
     </>
   );
