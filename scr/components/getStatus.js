@@ -5,7 +5,7 @@ class StatusMusico extends Component {
   getStatusName() {
     switch (this.props.status) {
       case '0':
-        return "APR";
+        return "ALUNO";
       case '1':
         return "RJM";
       case '2':

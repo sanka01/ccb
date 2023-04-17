@@ -10,8 +10,7 @@
       }
     },
     "production": {
-      "autoIncrement": true,
-      "version": "2.0.0"
+      "autoIncrement": true
     }
   }
 }

@@ -41,7 +41,8 @@
     "react-native-web": "~0.18.9",
     "react-responsive": "^9.0.2",
     "url": "^0.11.0",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "expo-updates": "~0.15.6"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
