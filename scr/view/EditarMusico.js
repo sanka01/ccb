@@ -33,7 +33,6 @@ export class EditarMusico extends Component {
 
     getMusico = async () => {
         let url = "https://apiccb.cdamorais.com/selectMusico.php";
-        console.log(this.props.route)
         let data = {
             id: this.props.route.params.id
         };
@@ -50,7 +49,10 @@ export class EditarMusico extends Component {
             setor: dados.id_setor,
             telefone: dados.telefone,
             email: dados.email
+        }, () =>{
+            console.log("Musico carregado")
         });
+        console.log(this.state)
     };
 
     getDadosForm = async () => {
@@ -69,8 +71,8 @@ export class EditarMusico extends Component {
     }
 
     componentDidMount() {
-        this.getMusico();
         this.getDadosForm()
+        this.getMusico();
     }
 
     deletarMusico = async () => {
@@ -197,7 +199,7 @@ export class EditarMusico extends Component {
                     <Picker.Item label="Não Oficializado" value='3' />
                 </Picker>
                 <Text>Comum</Text>
-                <Picker selectedValue={this.state.setores} onValueChange={this.setSetor}>
+                <Picker selectedValue={this.state.setor} onValueChange={this.setSetor}>
                     {this.state.setores.map((setor) => (
                         <Picker.Item key={setor.id} label={setor.nome} value={setor.id} />
                     ))}
