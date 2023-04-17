@@ -1,28 +1,17 @@
 {
   "cli": {
-    "version": ">= 3.5.1"
+    "appVersionSource": "remote"
   },
   "build": {
-    "development": {
-      "developmentClient": true,
+    "staging": {
       "distribution": "internal",
-      "ios": {
-        "resourceClass": "m1-medium"
-      }
-    },
-    "preview": {
-      "distribution": "internal",
-      "ios": {
-        "resourceClass": "m1-medium"
+      "android": {
+        "buildType": "apk"
       }
     },
     "production": {
-      "ios": {
-        "resourceClass": "m1-medium"
-      }
+      "autoIncrement": true,
+      "version": "2.0.0"
     }
-  },
-  "submit": {
-    "production": {}
   }
 }
