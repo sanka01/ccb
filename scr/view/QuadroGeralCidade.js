@@ -9,7 +9,7 @@ export class QuadroGeralCidade extends Component {
         return (
             <View style={style.container}>
                 <Text style={style.titulo}>{this.props.route.params.cidade}</Text>
-                <Text style={style.subtitulo}> Quadro GERAL</Text>
+                <Text style={style.subtitulo}> Quadro GERAL </Text>
                 <Quadro
                     url="selectDadosCidade.php"
                     data={{ cidade: this.props.route.params.id_cidade }}

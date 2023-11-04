@@ -6,18 +6,23 @@ import { ListarBotoesComums } from "./listarBotoesComuns";
 import { URL } from "@env";
 const style = require("../components/styles").styler
 
-
 export default class Quadro extends Component {
+    static handleDados([head, dados]) {
+        return {
+                ...head,
+                dados,
+            }
+    }
     constructor(props) {
         super(props)
         this.state = {
             cordas: 0,
             metais: 0,
-            madeiras: 0,
+            madeira: 0,
             organistas: 0,
             total: 0,
-            ofc: 0,
-            nfc: 0,
+            OFC: 0,
+            NFC: 0,
             renderizaMusicos: props.renderizaMusicos,
             renderizaComuns: props.renderizaComuns,
             loading: true,
@@ -36,22 +41,7 @@ export default class Quadro extends Component {
             body: JSON.stringify(data)
         })
         let dados = await resposta.json()
-        this.setState({
-            cordas: dados[0]["cordas"], madeiras: dados[0]["madeira"], metais: dados[0]["metais"], total: dados[0]["musicos"],
-            ofc: dados[0]["OFC"], nfc: dados[0]["NFC"],
-            organistas: dados[0]["organistas"],
-            musicos: dados[1], loading: false
-        })
-        if (dados[1]) {
-            this.setState({
-                comuns: dados[1]
-            })
-        }
-        if(dados[2]){
-            this.setState({
-                musicos: dados[2]
-            })
-        }
+        this.setState({...Quadro.handleDados(dados), loading: false})
     }
     getComuns({ item }) {
         return (
@@ -62,7 +52,7 @@ export default class Quadro extends Component {
         )
 
     }
-    renderItem = ({ item }) => {
+    renderMusico = ({ item }) => {
         return (
             <TouchableOpacity onPress={() => this.props.navigation.navigate('EditarMusico', { id: item.id })}>
                 <View style={style.itemMusico}>
@@ -77,14 +67,14 @@ export default class Quadro extends Component {
         )
     }
     render() {
-        var total = parseFloat(this.state.total)
-        var nfc = parseFloat(this.state.nfc)
-        var ofc = parseFloat(this.state.ofc)
+        var total = parseFloat(this.state.musicos)
+        var nfc = parseFloat(this.state.NFC)
+        var ofc = parseFloat(this.state.OFC)
         return (
             <>
                 <Porcentagens
                     metais={this.state.metais}
-                    madeiras={this.state.madeiras}
+                    madeiras={this.state.madeira}
                     cordas={this.state.cordas}
                     organistas={this.state.organistas} />
                 <View style={style.row}>
@@ -107,8 +97,8 @@ export default class Quadro extends Component {
                         : (
 
                             <FlatList
-                                data={this.state.musicos}
-                                renderItem={this.renderItem}
+                                data={this.state.dados}
+                                renderItem={this.renderMusico}
                                 keyExtractor={item => item.id}
                                 contentContainerStyle={{ paddingBottom: 300 }}
 
@@ -129,7 +119,7 @@ export default class Quadro extends Component {
                                     <Text style={style.texto}>Lista Geral</Text>
                                 </TouchableOpacity>
                                 <FlatList
-                                    data={this.state.comuns}
+                                    data={this.state.dados}
                                     renderItem={this.getComuns.bind(this)}
                                     keyExtractor={(item, index) => item.toString()}
 
