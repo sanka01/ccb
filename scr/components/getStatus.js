@@ -5,13 +5,17 @@ class StatusMusico extends Component {
   getStatusName() {
     switch (this.props.status) {
       case '0':
-        return "ALUNO";
+        return "AL-P";
       case '1':
         return "RJM";
       case '2':
         return "OFC";
       case '3':
-        return "NOF";
+          return "NOF";
+      case '4':
+        return "AL-I";
+      case '5':
+        return "AL-E";
       default:
         return "Aluno";
     }

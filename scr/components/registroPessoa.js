@@ -150,7 +150,9 @@ class RegistroPessoa extends Component {
                         this.setState({ status: itemValue })
                     }}
                 >
-                    <Picker.Item label="Aluno" value='0' />
+                    <Picker.Item label="Principiante" value='0' />
+                    <Picker.Item label="Com instrumento" value='4' />
+                    <Picker.Item label="Ensaio" value='5' />
                     <Picker.Item label="Reunião de Jovens e Menores" value='1' />
                     <Picker.Item label="Oficializado" value='2' />
                     <Picker.Item label="Não Oficializado" value='3' />

@@ -1,8 +1,19 @@
 import React, { Component } from "react";
 
-import { Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View, StyleSheet } from "react-native";
 
 const styler = require("../components/styles").styler
+
+const routes = [
+    { title: 'CIDADES', path: 'Cidades' },
+    { title: 'LISTA GERAL (REGIÃO INDIARA-GO)', path: 'TabelaMusicos', params: { cidade: 'Indiara', id_cidade: 2 }},
+    { title: 'CADASTRAR MÚSICO', path: 'CadastroMusico' },
+    { title: 'RELATÓRIO GERAL DA ORQUESTRA', path: 'QuadroGeral' },
+    { title: 'FREQUÊNCIA - ENSAIOS LOCAIS', path: 'QuadroGeral' },
+    { title: 'FREQUÊNCIA - ENSAIOS REGIONAL', path: 'QuadroGeral' },
+    { title: 'AGENDA', path: 'Agenda' },
+    { title: 'SOBRE O APP', path: 'Sobre' },
+]
 
 class Home extends Component {
     constructor(props) {
@@ -10,65 +21,13 @@ class Home extends Component {
     }
 
     render() {
-        return (
-            <>
-                <View style={styler.container_row}>
-                    <TouchableOpacity style={styler.botao_quadrado} onPress={
-                        () => this.props.navigation.navigate('Cidades')
-                    }>
-                        <Text style={styler.texto}>CIDADES</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styler.botao_quadrado} onPress={
-                        () => this.props.navigation.navigate('TabelaMusicos', {
-                            cidade: "Indiara",
-                            id_cidade: 2
-                        })
-                    }>
-                        <Text style={styler.texto}>LISTA GERAL (REGIÃO INDIARA-GO)</Text>
-                    </TouchableOpacity>
-                </View>
-
-                <View style={styler.container_row}>
-                    <TouchableOpacity style={styler.botao_quadrado} onPress={
-                        () => this.props.navigation.navigate('CadastroMusico')            
-                    }>
-                        <Text style={styler.texto}>CADASTRAR MÚSICO</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styler.botao_quadrado} onPress={
-                        () => this.props.navigation.navigate('QuadroGeral')
-                    } >
-                        <Text style={styler.texto}>RELATÓRIO GERAL DA ORQUESTRA</Text>
-                    </TouchableOpacity>
-                </View>
-
-                <View style={styler.container_row}>
-                    <TouchableOpacity style={styler.botao_quadrado}  onPress={
-                        () => this.props.navigation.navigate('QuadroGeral')
-                    } >
-                        <Text style={styler.texto}>FREQUÊNCIA - ENSAIOS LOCAIS</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styler.botao_quadrado}  onPress={
-                        () => this.props.navigation.navigate('QuadroGeral')
-                    } >
-                        <Text style={styler.texto}>FRQUÊNCIA - ENSAIO REGIONAL</Text>
-                    </TouchableOpacity>
-                </View>
-
-                <View style={styler.container_row}>
-                    <TouchableOpacity style={styler.botao_quadrado} onPress={
-                        () => this.props.navigation.navigate('Agenda')
-                    } >
-                        <Text style={styler.texto}>AGENDA</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styler.botao_quadrado} onPress={
-                        () => this.props.navigation.navigate('Sobre')
-                    }  >
-                        <Text style={styler.texto}>SOBRE O APP</Text>
-                    </TouchableOpacity>
-                </View>
-
-            </>
-        )
+        return <View style={styler.container_row}>
+            {routes.map(({title, path, params})=>
+            <TouchableOpacity style={styler.botao_quadrado} onPress={() => this.props.navigation.navigate(path, params)}>
+                <Text style={StyleSheet.compose(styler.texto, styler.texto_menu)}>{title}</Text>
+            </TouchableOpacity>
+        , this)}
+        </View>
     }
 }
 export default Home;

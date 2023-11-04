@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-
 import { FlatList, Text, TouchableOpacity, View } from "react-native";
-
+import {URL} from '@env'
 const styler = require("../components/styles").styler
 
 
@@ -13,7 +12,7 @@ export class Cidades extends Component {
         }
     }
     getCidades = async () => {
-        let url = "https://apiccb.cdamorais.com/selectCidades.php"
+        let url = URL + "selectCidades.php"
         let resposta = await fetch(url)
         let data = await resposta.json()
         this.setState({ cidades: data[0]['Rows'], loading: false })

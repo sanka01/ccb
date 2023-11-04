@@ -16,9 +16,13 @@ export const styler = StyleSheet.create(
         },
         container_row: {
             flex: 1,
-            flexDirection: "row",
-            justifyContent: "space-around",
+            margin: 'auto',
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            justifyContent: "space-evenly",
+            alignContent: 'space-around',
             alignItems: "center",
+            marginBottom: 20,
         },
         quadro_info: {
             fontSize: 14,
@@ -69,13 +73,19 @@ export const styler = StyleSheet.create(
             margin: 5,
         },
         botao_quadrado: {
-            width: "49%",
-            height: "99%",
+            width: 160,
+            height: 160,
             backgroundColor: azulClaro,
             textAlign: "center",
             borderColor: azulEscuro,
             borderWidth: 1,
-            borderRadius: 10
+            borderRadius: 20,
+            shadowColor: preto,
+            elevation: 10,
+        },
+        texto_menu: {
+            height: "100%",
+            textAlignVertical: "center",
         },
         texto: {
             color: azulEscuro,

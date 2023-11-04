@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { styler } from "../components/styles";
 import { Divider } from '@rneui/themed';
-
+import {URL} from '@env'
 
 export class Agenda extends Component {
     constructor(props) {
@@ -14,7 +14,7 @@ export class Agenda extends Component {
         }
     }
     getAgenda = async () => {
-        let url = "https://apiccb.cdamorais.com/agenda.php"
+        let url = URL +"agenda.php"
         let resposta = await fetch(url)
         let data = await resposta.json()
         this.setState({ agenda: data['agenda'], mensagem: data['mensagem'], loading: false })

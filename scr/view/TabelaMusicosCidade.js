@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { FlatList, Text, TouchableOpacity, View } from "react-native";
 import { Porcentagens } from "../components/porcentagens";
 import StatusMusico from "../components/getStatus";
+import Quadro from "../components/quadro";
 
 const style = require("../components/styles").styler
 
@@ -14,11 +15,13 @@ export class TabelaMusicosCidade extends Component {
             madeiras: 0,
             organistas: 0,
             total: 0,
+            ofc: 0,
+            nfc: 0,
             musicos: []
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.getDados()
     }
     getDados = async () => {
@@ -33,6 +36,7 @@ export class TabelaMusicosCidade extends Component {
         let dados = await resposta.json()
         this.setState({
             cordas: dados[0]["cordas"], madeiras: dados[0]["madeira"], metais: dados[0]["metais"], total: dados[0]["musicos"],
+            ofc: dados[0]["OFC"], nfc: dados[0]["NFC"],
             organistas: dados[0]["organistas"],
             musicos: dados[2], loading: false
         })
@@ -41,14 +45,23 @@ export class TabelaMusicosCidade extends Component {
 
     render() {
         var total = parseFloat(this.state.total)
-
-        
-
+        var nfc = parseFloat(this.state.nfc)
+        var ofc = parseFloat(this.state.ofc)
 
         return (
             <View style={{ flex: 0 }}>
                 <Text style={style.titulo}>{this.props.route.params.cidade}</Text>
-                <Text style={style.subtitulo}> Quadro GERAL</Text>
+                <Text style={style.subtitulo}> Quadro GERAL </Text>
+
+                <Quadro
+                    renderizaMusicos
+                    navigation={this.props.navigation}
+                    data={{cidade: this.props.route.params.id_cidade}}
+                    url="selectDadosCidade.php"
+                />
+
+
+
                 <Porcentagens
                     metais={this.state.metais}
                     madeiras={this.state.madeiras}
@@ -58,6 +71,14 @@ export class TabelaMusicosCidade extends Component {
                     <Text style={style.quadro_info}>
                         Total de músicos = {total}
                     </Text>
+                    <Text style={style.quadro_info}>
+                        OFC = {ofc}
+                    </Text>
+
+                    <Text style={style.quadro_info}>
+                        NFC = {nfc}
+                    </Text>
+
 
 
                 </View>
@@ -65,14 +86,14 @@ export class TabelaMusicosCidade extends Component {
                 {this.state.loading && <Text>Carregando...</Text>}
                 {!this.state.loading && (
 
-                <FlatList
-                    data={this.state.musicos}
-                    renderItem={this.renderItem}
-                    keyExtractor={item => item.id}
-                    contentContainerStyle={{ paddingBottom: 300 }}
+                    <FlatList
+                        data={this.state.musicos}
+                        renderItem={this.renderItem}
+                        keyExtractor={item => item.id}
+                        contentContainerStyle={{ paddingBottom: 300 }}
 
 
-                />
+                    />
                 )}
 
 
@@ -80,9 +101,9 @@ export class TabelaMusicosCidade extends Component {
         )
 
     }
-    renderItem = ({item}) => {
+    renderItem = ({ item }) => {
         return (
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('EditarMusico', {id: item.id})}>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('EditarMusico', { id: item.id })}>
                 <View style={style.itemMusico}>
                     <Text style={style.tituloMusico}>{item.nome_pessoa} | {item.setor}</Text>
                     <Text style={style.tituloMusico}>Instrumento: {item.nome_instrumento}</Text>

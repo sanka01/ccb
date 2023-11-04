@@ -1,6 +1,7 @@
 import { Picker } from "@react-native-picker/picker"
 import React, { Component } from "react"
 import { View, Text } from "react-native"
+import {URL} from '@env'
 
 
 class ListarCidades extends Component {
@@ -19,7 +20,7 @@ class ListarCidades extends Component {
 
 
     getDados = async () => {
-        let url = "https://apiccb.cdamorais.com/selectdadoscadastro.php"
+        let url = URL + "selectdadoscadastro.php"
         let resposta = await fetch(url)
         let data = await resposta.json()
 

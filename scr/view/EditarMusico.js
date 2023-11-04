@@ -1,14 +1,11 @@
 import React, { Component } from "react";
 import { Text, View, TextInput, Button, Modal, TouchableOpacity } from "react-native";
-import StatusMusico from "../components/getStatus";
 import { Picker } from "@react-native-picker/picker";
-import ListarCidades from "../components/listarCidades";
-import { ListarComuns } from "../components/listarComuns";
-import ListarFamilia from "../components/listarFamilia";
-import { ListarInstrumentos } from "../components/listarInstrumentos";
 import { Divider } from "@rneui/themed/dist/Divider";
 import { StyleSheet } from "react-native";
 const Style = require("../components/styles.js").styler
+
+import {URL} from '@env'
 
 export class EditarMusico extends Component {
     constructor(props) {
@@ -32,7 +29,7 @@ export class EditarMusico extends Component {
     }
 
     getMusico = async () => {
-        let url = "https://apiccb.cdamorais.com/selectMusico.php";
+        let url = URL + "selectMusico.php";
         let data = {
             id: this.props.route.params.id
         };
@@ -56,7 +53,7 @@ export class EditarMusico extends Component {
     };
 
     getDadosForm = async () => {
-        let url = "https://apiccb.cdamorais.com/selectdadoscadastro.php"
+        let url = URL +"selectdadoscadastro.php"
         let resposta = await fetch(url)
         let dados = await resposta.json()
         this.setState({
@@ -76,7 +73,7 @@ export class EditarMusico extends Component {
     }
 
     deletarMusico = async () => {
-        let url = "https://apiccb.cdamorais.com/excluir.php"
+        let url = URL +"excluir.php"
         let data = {
             id: this.state.id
         }
@@ -95,7 +92,7 @@ export class EditarMusico extends Component {
             })
     }
     atualizarMusico = async () => {
-        let url = "https://apiccb.cdamorais.com/editar.php";
+        let url = URL + "editar.php";
         let data = {
             id: this.state.id,
             nome: this.state.nome,
