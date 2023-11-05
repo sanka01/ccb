@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { styler } from "../components/styles";
 import { Divider } from '@rneui/themed';
-import {URL} from '@env'
+import {EXPO_PUBLIC_URL as URL} from '@env'
 
 export class Agenda extends Component {
     constructor(props) {

@@ -1,7 +1,7 @@
 import { Picker } from "@react-native-picker/picker"
 import React, { Component } from "react"
 import { View, Text } from "react-native"
-import {URL} from '@env'
+import {EXPO_PUBLIC_URL as URL} from '@env'
 
 
 class ListarCidades extends Component {

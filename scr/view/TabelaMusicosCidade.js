@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import { FlatList, Text, TouchableOpacity, View } from "react-native";
-import { Porcentagens } from "../components/porcentagens";
-import StatusMusico from "../components/getStatus";
+import { Text, View } from "react-native";
 import Quadro from "../components/quadro";
 
 const style = require("../components/styles").styler

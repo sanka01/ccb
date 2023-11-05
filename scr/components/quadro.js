@@ -3,7 +3,7 @@ import { FlatList, Text, TouchableOpacity, View } from "react-native";
 import { Porcentagens } from "../components/porcentagens";
 import StatusMusico from "../components/getStatus";
 import { ListarBotoesComums } from "./listarBotoesComuns";
-import { URL } from "@env";
+import {EXPO_PUBLIC_URL as URL} from '@env'
 const style = require("../components/styles").styler
 
 export default class Quadro extends Component {

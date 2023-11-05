@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Text, View } from "react-native";
-import { URL } from "@env";
 import Quadro from "../components/quadro";
 const style = require("../components/styles").styler
 export class QuadroComum extends Component {

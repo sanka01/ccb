@@ -5,6 +5,7 @@ import ListarCidades from "./listarCidades";
 import { ListarComuns } from "./listarComuns";
 import ListarFamilia from "./listarFamilia";
 import { ListarInstrumentos } from "./listarInstrumentos";
+import {EXPO_PUBLIC_URL as URL} from '@env'
 
 const Style = require("./styles").styler
 class RegistroPessoa extends Component {
@@ -30,7 +31,7 @@ class RegistroPessoa extends Component {
 
 
     getDados = async () => {
-        let url = "https://apiccb.cdamorais.com/selectdadoscadastro.php"
+        let url = URL + "selectdadoscadastro.php"
         let resposta = await fetch(url)
         let data = await resposta.json()
         this.setState({
@@ -49,7 +50,7 @@ class RegistroPessoa extends Component {
         if (!this.state.nome) {
             alert("Erro, campo obrigatorio faltando")
         } else {
-            let insertAPIURL = "https://apiccb.cdamorais.com/inserir.php"
+            let insertAPIURL = URL + "inserir.php"
 
             let headers = {
                 'Accept': 'application/json',

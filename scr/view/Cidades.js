@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { FlatList, Text, TouchableOpacity, View } from "react-native";
-import {URL} from '@env'
+import {EXPO_PUBLIC_URL as URL} from '@env'
 const styler = require("../components/styles").styler
 
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, FlatList, View } from 'react-native';
 import { renderPessoa } from './listarPessoa';
+import {EXPO_PUBLIC_URL as URL} from '@env'
 
 class ListarPessoas extends Component {
 
@@ -16,7 +17,7 @@ class ListarPessoas extends Component {
       }
       
       getPessoas = async () => {
-        let url = "https://apiccb.cdamorais.com/selectall.php"
+        let url = URL + "selectall.php"
         let resposta = await fetch(url)
         let data = await resposta.json()
         this.setState({ pessoas: data[0]['Rows'], loading: false })

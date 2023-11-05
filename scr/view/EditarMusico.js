@@ -5,7 +5,7 @@ import { Divider } from "@rneui/themed/dist/Divider";
 import { StyleSheet } from "react-native";
 const Style = require("../components/styles.js").styler
 
-import {URL} from '@env'
+import {EXPO_PUBLIC_URL as URL} from '@env'
 
 export class EditarMusico extends Component {
     constructor(props) {
