@@ -13,6 +13,7 @@ import { Sobre } from './scr/view/Sobre';
 import { TabelaMusicos } from './scr/view/TabelaMusicos';
 import { TabelaMusicosCidade } from './scr/view/TabelaMusicosCidade';
 import { LoginForm } from './scr/view/Login';
+import { Ensaios } from './scr/view/Ensaios';
 
 const Stack = createNativeStackNavigator();
 class App extends Component {
@@ -49,6 +50,11 @@ class App extends Component {
             name="Cidades"
             component={Cidades}
             options={{ title: 'Quadro de Orquestra' }}
+          />
+          <Stack.Screen
+            name="Ensaios"
+            component={Ensaios}
+            options={{ title: 'Ensaios' }}
           />
           <Stack.Screen
             name="QuadroGeralCidade"

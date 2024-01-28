@@ -1,6 +1,7 @@
 {
   "cli": {
-    "appVersionSource": "remote"
+    "appVersionSource": "remote",
+    "version": "^3.5.1"
   },
   "build": {
     "staging": {

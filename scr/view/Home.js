@@ -6,11 +6,11 @@ const styler = require("../components/styles").styler
 
 const routes = [
     { title: 'CIDADES', path: 'Cidades' },
-    { title: 'LISTA GERAL (REGIÃO INDIARA-GO)', path: 'TabelaMusicos', params: { cidade: 'Indiara', id_cidade: 2 }},
+    { title: 'LISTA GERAL (REGIÃO INDIARA)', path: 'TabelaMusicos', params: { cidade: 'Indiara', id_cidade: 2 }},
     { title: 'CADASTRAR MÚSICO', path: 'CadastroMusico' },
-    { title: 'RELATÓRIO GERAL DA ORQUESTRA', path: 'QuadroGeral' },
-    { title: 'FREQUÊNCIA - ENSAIOS LOCAIS', path: 'QuadroGeral' },
-    { title: 'FREQUÊNCIA - ENSAIOS REGIONAL', path: 'QuadroGeral' },
+    { title: 'RELATÓRIO GERAL', path: 'QuadroGeral' },
+    { title: 'ENSAIOS', path: 'Ensaios' },
+    { title: 'BUSCADOR', path: 'QuadroGeral' },
     { title: 'AGENDA', path: 'Agenda' },
     { title: 'SOBRE O APP', path: 'Sobre' },
 ]

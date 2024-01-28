@@ -64,13 +64,18 @@ export const styler = StyleSheet.create(
             marginTop: 10
         },
         botao: {
-            /* width: 400, */
+            width: '85%',
+            alignSelf: 'center',
+            marginBottom: 18,
             height: 50,
             backgroundColor: azulClaro,
             justifyContent: "center",
             textAlign: "center",
             borderRadius: 10,
-            margin: 5,
+            shadowColor: preto,
+            elevation: 10,
+            borderWidth: 0.5,
+            borderColor: preto
         },
         botao_quadrado: {
             width: 160,
@@ -104,8 +109,11 @@ export const styler = StyleSheet.create(
         itemMusico: {
             backgroundColor: azulClaro,
             padding: 10,
-            marginVertical: 2,
-            marginHorizontal: 5,
+            marginVertical: 5,
+            marginHorizontal: 15,
+            elevation: 5,
+            borderWidth: 0.5,
+            borderRadius: 10,
         },
         tituloMusico: {
             fontSize: 18,

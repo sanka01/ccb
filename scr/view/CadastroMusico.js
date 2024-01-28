@@ -12,7 +12,7 @@ export class CadastroMusico extends Component {
             <View style={style.container}>
                 <Text style={style.titulo}>Cadastrar Musico</Text>
                 <RegistroPessoa
-
+                    navigation={this.props.navigation}
                 />
             </View>
         )

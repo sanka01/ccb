@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { Text, View, TextInput, Button, Modal, TouchableOpacity } from "react-native";
+import { statusMusico } from "../components/getStatus.js";
 import { Picker } from "@react-native-picker/picker";
 import { Divider } from "@rneui/themed/dist/Divider";
 import { StyleSheet } from "react-native";
 const Style = require("../components/styles.js").styler
 
-import {EXPO_PUBLIC_URL as URL} from '@env'
+import { EXPO_PUBLIC_URL as URL } from '@env'
 
 export class EditarMusico extends Component {
     constructor(props) {
@@ -25,7 +26,25 @@ export class EditarMusico extends Component {
             instrumentos: [],
             setores: [],
             exibirConfirmacao: false
-        };
+        }
+    }
+    resetState () {
+        this.setState({
+            id: 0,
+            nome: "",
+            status: 0,
+            instrumento: 0,
+            setor: 0,
+            familia: 0,
+            telefone: "",
+            email: "",
+            estados: [],
+            cidades: [],
+            familias: [],
+            instrumentos: [],
+            setores: [],
+            exibirConfirmacao: false
+        })
     }
 
     getMusico = async () => {
@@ -46,14 +65,14 @@ export class EditarMusico extends Component {
             setor: dados.id_setor,
             telefone: dados.telefone,
             email: dados.email
-        }, () =>{
+        }, () => {
             console.log("Musico carregado")
+            console.log(JSON.stringify(this.state, undefined, 4))
         });
-        console.log(this.state)
     };
 
     getDadosForm = async () => {
-        let url = URL +"selectdadoscadastro.php"
+        let url = URL + "selectdadoscadastro.php"
         let resposta = await fetch(url)
         let dados = await resposta.json()
         this.setState({
@@ -63,7 +82,6 @@ export class EditarMusico extends Component {
             instrumentos: dados[3],
             setores: dados[4],
         }, () => {
-            console.log("Dados de formulário atualizados")
         });
     }
 
@@ -73,7 +91,7 @@ export class EditarMusico extends Component {
     }
 
     deletarMusico = async () => {
-        let url = URL +"excluir.php"
+        let url = URL + "excluir.php"
         let data = {
             id: this.state.id
         }
@@ -159,7 +177,7 @@ export class EditarMusico extends Component {
     };
 
     render() {
-
+        console.log(this.state.status)
         return (
             <View style={{ flex: 1, paddingLeft: 8, paddingRight: 8 }}>
                 <TextInput
@@ -185,15 +203,13 @@ export class EditarMusico extends Component {
                 />
                 <Text>Status</Text>
                 <Picker
-                    selectedValue={this.state.status}
+                    selectedValue={parseInt(this.state.status)}
                     onValueChange={(itemValue, itemIndex) => {
                         this.setState({ status: itemValue })
                     }}
                 >
-                    <Picker.Item label="Aluno" value='0' />
-                    <Picker.Item label="Reunião de Jovens e Menores" value='1' />
-                    <Picker.Item label="Oficializado" value='2' />
-                    <Picker.Item label="Não Oficializado" value='3' />
+                    {statusMusico.map(({ name: label }, value) =>
+                        <Picker.Item label={label} value={value}></Picker.Item>)}
                 </Picker>
                 <Text>Comum</Text>
                 <Picker selectedValue={this.state.setor} onValueChange={this.setSetor}>

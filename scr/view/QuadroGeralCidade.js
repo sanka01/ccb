@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {  Text, View } from "react-native";
+import {  StyleSheet, Text, View } from "react-native";
 const style = require("../components/styles").styler
 import Quadro from "../components/quadro";
 

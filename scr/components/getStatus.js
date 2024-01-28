@@ -1,28 +1,47 @@
 import React, { Component } from 'react';
 import { Text } from 'react-native';
 
+export const statusMusico = [
+  {
+    abr: 'AL-PRI',
+    name: 'Aluno - Principiante',
+  },
+  {
+    abr: 'AL-RJM',
+    name: 'Aluno - Reunião de Jovens e Menores',
+  },
+  {
+    abr: 'OFICIAL',
+    name: 'Oficializado',
+  },
+  {
+    abr: 'AL-COF',
+    name: 'Aluno - Culto Oficial',
+  },
+  {
+    abr: 'AL-INS',
+    name: 'Aluno - Com Instrumento',
+  },
+  {
+    abr: 'AL-ENS',
+    name: 'Aluno - Ensaio',
+  },
+]
+statusMusico.default = {
+  abr: 'Aluno',
+  name: 'Aluno',
+}
+
 class StatusMusico extends Component {
-  getStatusName() {
-    switch (this.props.status) {
-      case '0':
-        return "AL-P";
-      case '1':
-        return "RJM";
-      case '2':
-        return "OFC";
-      case '3':
-          return "NOF";
-      case '4':
-        return "AL-I";
-      case '5':
-        return "AL-E";
-      default:
-        return "Aluno";
-    }
+  getStatusNameAbr() {
+    return statusMusico[this.props.status]?.abr || statusMusico.default.abr
+  }
+  getStatusName(){
+    return statusMusico[this.props.status]?.name || statusMusico.default.name
   }
 
   render() {
-    const statusName = this.getStatusName();
+    const statusName = this.getStatusNameAbr();
 
     return (
       <Text>Status: {statusName}</Text>

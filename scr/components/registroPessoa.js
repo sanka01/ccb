@@ -1,6 +1,7 @@
 import { Picker } from "@react-native-picker/picker";
 import React, { Component } from "react";
 import { Button, Text, TextInput, View } from "react-native";
+import { statusMusico } from "./getStatus";
 import ListarCidades from "./listarCidades";
 import { ListarComuns } from "./listarComuns";
 import ListarFamilia from "./listarFamilia";
@@ -27,8 +28,26 @@ class RegistroPessoa extends Component {
             instrumentos: [],
             familias: []
         }
+        props.navigation.addListener('focus', () => this.resetState())
     }
 
+    resetState() {
+        this.setState({
+            nome: "",
+            email: "",
+            telefone: "",
+            status: "0",
+            cidade: "2",
+            estado: "1",
+            setor: "2",
+            familia: "1",
+            instrumento: "1",
+            setores: [],
+            cidades: [],
+            instrumentos: [],
+            familias: []
+        })
+    }
 
     getDados = async () => {
         let url = URL + "selectdadoscadastro.php"
@@ -77,6 +96,7 @@ class RegistroPessoa extends Component {
                 .then((response) => response.json())
                 .then((response) => {
                     alert(response[0].Message);
+                    this.resetState()
                 })
                 .catch((error) => {
                     alert("Error" + error);
@@ -130,18 +150,21 @@ class RegistroPessoa extends Component {
                     placeholder='Nome Completo'
                     placeholderTextColor={"grey"}
                     style={Style.textoInput}
+                    value={this.state.nome}
                     onChangeText={nome => this.setState({ nome: nome })}
                 />
                 <TextInput
                     placeholder='E-mail'
                     placeholderTextColor={"grey"}
                     style={Style.textoInput}
+                    value={this.state.email}
                     onChangeText={email => this.setState({ email: email })}
                 />
                 <TextInput
                     placeholder='Telefone'
                     placeholderTextColor={"grey"}
                     style={Style.textoInput}
+                    value={this.state.telefone}
                     onChangeText={telefone => this.setState({ telefone: telefone })}
                 />
                 <Text>Status</Text>
@@ -151,12 +174,8 @@ class RegistroPessoa extends Component {
                         this.setState({ status: itemValue })
                     }}
                 >
-                    <Picker.Item label="Principiante" value='0' />
-                    <Picker.Item label="Com instrumento" value='4' />
-                    <Picker.Item label="Ensaio" value='5' />
-                    <Picker.Item label="Reunião de Jovens e Menores" value='1' />
-                    <Picker.Item label="Oficializado" value='2' />
-                    <Picker.Item label="Não Oficializado" value='3' />
+                    {statusMusico.map(({name : label}, value) =>
+                    <Picker.Item label={label} value={value}></Picker.Item>)}
                 </Picker>
                 <Text>Cidade</Text>
                 <ListarCidades estado={this.state.estado} cidade={this.setCidade} />

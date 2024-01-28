@@ -29,6 +29,8 @@ export default class Quadro extends Component {
             musicos: [],
             url: props.url
         }
+        props.navigation.addListener('focus', () => this.getDados())
+
     }
     componentDidMount() {
         this.getDados()
@@ -46,6 +48,7 @@ export default class Quadro extends Component {
     getComuns({ item }) {
         return (
             <ListarBotoesComums
+                style={style.botao}
                 nome={item.nome}
                 id={item.id}
                 navigation={this.props.navigation} />
@@ -54,8 +57,10 @@ export default class Quadro extends Component {
     }
     renderMusico = ({ item }) => {
         return (
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('EditarMusico', { id: item.id })}>
-                <View style={style.itemMusico}>
+            <TouchableOpacity
+                style={style.itemMusico}
+                onPress={() => this.props.navigation.navigate('EditarMusico', { id: item.id })}>
+                <View>
                     <Text style={style.tituloMusico}>{item.nome_pessoa} | {item.setor}</Text>
                     <Text style={style.tituloMusico}>Instrumento: {item.nome_instrumento}</Text>
 
@@ -79,7 +84,7 @@ export default class Quadro extends Component {
                     organistas={this.state.organistas} />
                 <View style={style.row}>
                     <Text style={style.quadro_info}>
-                        Total de músicos = {total}
+                        Músicos = {total}
                     </Text>
 
                     <Text style={style.quadro_info}>
