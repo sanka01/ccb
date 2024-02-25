@@ -8,28 +8,14 @@ class ListarCidades extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            loading: true,
+            loading: false,
             cidades: [],
             cidade: ""
         }
     }
-    componentDidMount() {
-        this.getDados()
-    }
 
-
-
-    getDados = async () => {
-        let url = URL + "selectdadoscadastro.php"
-        let resposta = await fetch(url)
-        let data = await resposta.json()
-
-        this.setState({ cidades: data[1], loading: false })
-        this.props.cidade = data[1][0]
-
-    }
     cidade = () => {
-        return this.state.cidades.map((cidade) => {
+        return this.props.cidades.map((cidade) => {
             if (cidade.estado_cidade == this.props.estado) {
                 return <Picker.Item label={cidade.nome_cidade} key={cidade.cidade} value={cidade.cidade} />
             } else {
@@ -48,7 +34,6 @@ class ListarCidades extends Component {
                         onValueChange={(itemValue, itemIndex) => {
                             this.setState({cidade: itemValue})
                             this.props.cidade(itemValue)
-                        
                         } }
                     >
                         {this.cidade()}

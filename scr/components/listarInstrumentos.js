@@ -8,28 +8,15 @@ export class ListarInstrumentos extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            loading: true,
+            loading: false,
             instrumentos: [],
             instrumento: ""
         }
     }
-    componentDidMount() {
-        this.getDados()
-    }
 
 
-
-    getDados = async () => {
-        let url = URL + "selectdadoscadastro.php"
-        let resposta = await fetch(url)
-        let data = await resposta.json()
-
-        this.setState({ instrumentos: data[3], loading: false })
-        this.props.instrumento = data[3][0]
-
-    }
     instrumento = () => {
-        return this.state.instrumentos.map((instrumento) => {
+        return this.props.instrumentos.map((instrumento) => {
             
             if (instrumento.familia == this.props.familia) {
                 return <Picker.Item label={instrumento.nome} key={instrumento.id} value={instrumento.id} />

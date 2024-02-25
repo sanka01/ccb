@@ -8,25 +8,15 @@ class ListarFamilia extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            loading: true,
+            loading: false,
             familia: "",
             familias: []
         }
     }
-    componentDidMount() {
-        this.getDados()
-    }
 
-    getDados = async () => {
-        let url = URL +"selectdadoscadastro.php"
-        let resposta = await fetch(url)
-        let data = await resposta.json()
 
-        this.setState({ familias: data[2], loading: false })
-
-    }
     familia = () => {
-        return this.state.familias.map((familia) => {
+        return this.props.familias.map((familia) => {
             return <Picker.Item label={familia.nome_familia} key={familia.id} value={familia.id} />
         })
     }

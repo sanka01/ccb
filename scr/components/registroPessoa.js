@@ -6,7 +6,7 @@ import ListarCidades from "./listarCidades";
 import { ListarComuns } from "./listarComuns";
 import ListarFamilia from "./listarFamilia";
 import { ListarInstrumentos } from "./listarInstrumentos";
-import {EXPO_PUBLIC_URL as URL} from '@env'
+import { EXPO_PUBLIC_URL as URL } from '@env'
 
 const Style = require("./styles").styler
 class RegistroPessoa extends Component {
@@ -26,9 +26,11 @@ class RegistroPessoa extends Component {
             setores: [],
             cidades: [],
             instrumentos: [],
-            familias: []
+            familias: [],
+            loading: true
         }
         props.navigation.addListener('focus', () => this.resetState())
+        console.log("Registro de pessoa: tela iniciadaa")
     }
 
     resetState() {
@@ -57,7 +59,8 @@ class RegistroPessoa extends Component {
             cidades: data[1],
             familias: data[2],
             instrumentos: data[3],
-            setores: data[4]
+            setores: data[4],
+            loading: false
         })
     }
 
@@ -102,7 +105,7 @@ class RegistroPessoa extends Component {
                     alert("Error" + error);
                 })
 
-            
+
         }
     }
 
@@ -174,17 +177,23 @@ class RegistroPessoa extends Component {
                         this.setState({ status: itemValue })
                     }}
                 >
-                    {statusMusico.map(({name : label}, value) =>
-                    <Picker.Item label={label} value={value}></Picker.Item>)}
+                    {statusMusico.map(({ name: label }, value) =>
+                        <Picker.Item label={label} value={value}></Picker.Item>)}
                 </Picker>
-                <Text>Cidade</Text>
-                <ListarCidades estado={this.state.estado} cidade={this.setCidade} />
-                <Text>Comum</Text>
-                <ListarComuns setor={this.setSetor} cidade={this.state.cidade} />
-                <Text>Familia de instrumento</Text>
-                <ListarFamilia familia={this.setFamilia} />
-                <Text>Instrumento</Text>
-                <ListarInstrumentos familia={this.state.familia} instrumento={this.setInstrumento} />
+                {this.state.loading && <Text>Carregando...</Text>}
+                {!this.state.loading && (
+                    <>                
+                    <Text>Cidade</Text>
+                        <ListarCidades estado={this.state.estado} cidade={this.setCidade} cidades={this.state.cidades} />
+                        <Text>Comum</Text>
+                        <ListarComuns setor={this.setSetor} cidade={this.state.cidade} setores={this.state.setores}/>
+                        <Text>Familia de instrumento</Text>
+                        <ListarFamilia familia={this.setFamilia} familias={this.state.familias} />
+                        <Text>Instrumento</Text>
+                        <ListarInstrumentos familia={this.state.familia} instrumento={this.setInstrumento} instrumentos={this.state.instrumentos}/>
+                    </>
+
+                )}
                 <Button
                     style={Style.button}
                     title='Registrar'

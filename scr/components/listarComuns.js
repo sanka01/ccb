@@ -8,28 +8,14 @@ export class ListarComuns extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            loading: true,
+            loading: false,
             setores: [],
             setor: ""
         }
     }
-    componentDidMount() {
-        this.getDados()
-    }
 
-
-
-    getDados = async () => {
-        let url = URL + "selectdadoscadastro.php"
-        let resposta = await fetch(url)
-        let data = await resposta.json()
-
-        this.setState({ setores: data[4], loading: false })
-        this.props.cidade = data[4][0]
-
-    }
     getSetor = () => {
-        return this.state.setores.map((setor) => {
+        return this.props.setores.map((setor) => {
             if (setor.cidade == this.props.cidade) {
                 return <Picker.Item label={setor.nome} key={setor.id} value={setor.id} />
             } else {

@@ -32,7 +32,8 @@ export class Sobre extends Component{
                 <Text style={styler.subtitulo}>Desenvolvido por:</Text>
                 <OpenURLButton  style={styler.botao}  url={url}> SVG EXPERIENCE</OpenURLButton>
                 <Text style={styler.texto}>Desenvolvedor: Samuel S Morais</Text>
-
+                <Text style={styler.texto}>Versão 0.5.2</Text>
+                <Text style={styler.texto}>verificação de bug na tela de cadastro</Text>
             </View>
         )
     }

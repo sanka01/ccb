@@ -1,13 +1,13 @@
 {
   "cli": {
-    "appVersionSource": "remote",
-    "version": "^3.5.1"
+    "appVersionSource": "remote"
   },
   "build": {
     "staging": {
       "distribution": "internal",
       "android": {
-        "buildType": "apk"
+        "buildType": "apk",
+        "developmentClient": true
       },
       "env": {
         "EXPO_PUBLIC_URL": "https://www.cdamorais.com/apiccb/"
