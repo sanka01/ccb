@@ -16,7 +16,7 @@ export const statusMusico = [
   },
   {
     abr: 'AL-COF',
-    name: 'Aluno - Culto Oficial',
+    name: 'Aluno - Culto Oficial',  
   },
   {
     abr: 'AL-INS',
@@ -50,3 +50,4 @@ class StatusMusico extends Component {
 }
 
 export default StatusMusico;
+ 

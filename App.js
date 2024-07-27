@@ -14,6 +14,7 @@ import { TabelaMusicos } from './scr/view/TabelaMusicos';
 import { TabelaMusicosCidade } from './scr/view/TabelaMusicosCidade';
 import { LoginForm } from './scr/view/Login';
 import { Ensaios } from './scr/view/Ensaios';
+import { RelatorioPerspectiva } from './scr/view/RelatorioPerspectiva';
 
 const Stack = createNativeStackNavigator();
 class App extends Component {
@@ -27,7 +28,7 @@ class App extends Component {
     this.handleLogin = this.handleLogin.bind(this);
   }
   handleLogin() {
-      this.setState({ isAuthenticated: true });
+    this.setState({ isAuthenticated: true });
   }
   render() {
 
@@ -35,7 +36,7 @@ class App extends Component {
 
     if (!isAuthenticated) {
       return (
-       <LoginForm onLogin={this.handleLogin}/>
+        <LoginForm onLogin={this.handleLogin} />
       )
     }
     return (
@@ -99,6 +100,11 @@ class App extends Component {
           <Stack.Screen
             name="EditarMusico"
             component={EditarMusico}
+            options={{ title: 'Quadro de Orquestra' }}
+          />
+          <Stack.Screen
+            name="RelatorioPerspectiva"
+            component={RelatorioPerspectiva}
             options={{ title: 'Quadro de Orquestra' }}
           />
         </Stack.Navigator>

@@ -30,7 +30,6 @@ class RegistroPessoa extends Component {
             loading: true
         }
         props.navigation.addListener('focus', () => this.resetState())
-        console.log("Registro de pessoa: tela iniciadaa")
     }
 
     resetState() {
@@ -178,7 +177,7 @@ class RegistroPessoa extends Component {
                     }}
                 >
                     {statusMusico.map(({ name: label }, value) =>
-                        <Picker.Item label={label} value={value}></Picker.Item>)}
+                        <Picker.Item key={value.id} label={label} value={value}></Picker.Item>)}
                 </Picker>
                 {this.state.loading && <Text>Carregando...</Text>}
                 {!this.state.loading && (

@@ -3,15 +3,15 @@ import { FlatList, Text, TouchableOpacity, View } from "react-native";
 import { Porcentagens } from "../components/porcentagens";
 import StatusMusico from "../components/getStatus";
 import { ListarBotoesComums } from "./listarBotoesComuns";
-import {EXPO_PUBLIC_URL as URL} from '@env'
+import { EXPO_PUBLIC_URL as URL } from '@env'
 const style = require("../components/styles").styler
 
 export default class Quadro extends Component {
     static handleDados([head, dados]) {
         return {
-                ...head,
-                dados,
-            }
+            ...head,
+            dados,
+        }
     }
     constructor(props) {
         super(props)
@@ -23,8 +23,10 @@ export default class Quadro extends Component {
             total: 0,
             OFC: 0,
             NFC: 0,
+            renderizaPorcentagens: props.renderizaPorcentagens ?? true,
             renderizaMusicos: props.renderizaMusicos,
             renderizaComuns: props.renderizaComuns,
+            incluiIniciantes: props.incluiIniciantes,
             loading: true,
             musicos: [],
             url: props.url
@@ -43,7 +45,7 @@ export default class Quadro extends Component {
             body: JSON.stringify(data)
         })
         let dados = await resposta.json()
-        this.setState({...Quadro.handleDados(dados), loading: false})
+        this.setState({ ...Quadro.handleDados(dados), loading: false })
     }
     getComuns({ item }) {
         return (
@@ -77,23 +79,45 @@ export default class Quadro extends Component {
         var ofc = parseFloat(this.state.OFC)
         return (
             <>
-                <Porcentagens
-                    metais={this.state.metais}
-                    madeiras={this.state.madeira}
-                    cordas={this.state.cordas}
-                    organistas={this.state.organistas} />
+                {this.state.renderizaPorcentagens
+                    ? <Porcentagens
+                        metais={this.state.metais}
+                        madeiras={this.state.madeira}
+                        cordas={this.state.cordas}
+                        organistas={this.state.organistas} />
+                    : <View style={style.row}>
+                        {['metais', 'madeira', 'cordas', 'organistas']
+                        .map(inst => <View style={style.coluna}>
+                            <Text style={style.quadro_info}>
+                                {this.state[inst]}
+                                {'\n'}
+                                {[
+                                    inst[0].toUpperCase(), 
+                                    ...inst.substring(1), 
+                                    inst.at(-1) !== 's' ? 's' : undefined,
+                                ]}
+                            </Text>
+                        </View>)}
+                    </View>}
                 <View style={style.row}>
-                    <Text style={style.quadro_info}>
-                        Músicos = {total}
-                    </Text>
+                    <View style={style.coluna}>
+                        <Text style={style.quadro_info}>
+                            Músicos = {total}
+                        </Text>
+                    </View>
+                    <View style={style.coluna}>
 
-                    <Text style={style.quadro_info}>
-                        OFC = {ofc}
-                    </Text>
+                        <Text style={style.quadro_info}>
+                            OFC = {ofc}
+                        </Text>
+                    </View>
+                    <View style={style.coluna}>
 
-                    <Text style={style.quadro_info}>
-                        NFC = {nfc}
-                    </Text>
+                        <Text style={style.quadro_info}>
+                            NFC = {nfc}
+                        </Text>
+                    </View>
+
 
                 </View>
                 {this.state.renderizaMusicos && (

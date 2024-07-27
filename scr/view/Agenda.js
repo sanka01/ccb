@@ -53,7 +53,7 @@ export class Agenda extends Component {
                         <FlatList
                             data={this.state.agenda}
                             renderItem={this.getEnsaio}
-                            keyExtractor={(i, j) => i.toString()}
+                            keyExtractor={({nome}) => nome}
                             style={{ height: '100%' }}
 
                         />

@@ -43,7 +43,7 @@ export class Cidades extends Component {
                         <FlatList
                             data={this.state.cidades}
                             renderItem={this.getCidade}
-                            keyExtractor={(i, j) => i.toString()}
+                            keyExtractor={(cidade) => cidade.id}
 
                         />
                     )}

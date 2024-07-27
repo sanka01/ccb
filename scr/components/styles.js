@@ -25,7 +25,7 @@ export const styler = StyleSheet.create(
             marginBottom: 20,
         },
         quadro_info: {
-            fontSize: 14,
+            fontSize: 12,
             color: azulEscuro,
             textAlign: "center",
             alignSelf: "center",
@@ -39,7 +39,9 @@ export const styler = StyleSheet.create(
             flexDirection: "row",
             justifyContent: "space-evenly",
         },
+        coluna: {
 
+        },
         container_column: {
 
             flex: 1,
